@@ -1,0 +1,82 @@
+﻿@model MyApp.Models.ExportCustomerGroupDto;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.HiddenFor(m => m.ExportCustGrpGuid);
+
+<div class="container">
+    <div class="page-inner">
+        @using (Html.BeginForm("Save", "User", FormMethod.Post))
+        {
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Export Customer Group </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 ">
+                                    <div class="form-group">
+                                        <label for="username"><span class="mandatory">*</span>Customer Code</label>
+                                        @Html.TextBoxFor(m => m.CustCode, new { @class = "form-control form-control-sm", @placeholder = "Customer Code" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span>Division</label>
+                                        @Html.TextBoxFor(m => m.Division, new { @class = "form-control form-control-sm", @placeholder = "Division" })
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span>DIC</label>
+                                        @Html.TextBoxFor(m => m.DIC, new { @class = "form-control form-control-sm", @placeholder = "DIC" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span>Line DET</label>
+                                        @Html.TextBoxFor(m => m.Line_DET, new { @class = "form-control form-control-sm", @placeholder = "Line DET" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span>Line Type</label>
+                                        @Html.TextBoxFor(m => m.Line_Type, new { @class = "form-control form-control-sm decimalonly", @placeholder = "Line Type" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span>Line Type2</label>
+                                        @Html.TextBoxFor(m => m.Line_Type2, new { @class = "form-control form-control-sm decimalonly", @placeholder = "Line Type2" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="password">Active</label><br />
+                                        @if (Model.ExportCustGrpGuid != Guid.Empty)
+                                        {
+                                            @Html.CheckBoxFor(m => m.IsActive)
+                                        }
+                                        else
+                                        {
+                                            @Html.CheckBoxFor(m => m.IsActive, new { @disabled = "disabled" })
+                                        }
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="button" class="btn btn-success" id="save">@ViewBag.Button</button>
+                            <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/myapp.js/ExportCustomerGroup.js?var=@DateTime.Now"></script>
+
+
