@@ -1,0 +1,111 @@
+﻿@model IPagedList<MyApp.Models.DailyValueTGTDto>;
+@using X.PagedList;
+<div class="table-responsive">
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="dicname" placeholder="DIC NAME" />
+                </th>
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="linetype" placeholder="Line Type" />
+                </th>
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="date" placeholder="Date" />
+                </th>
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="valuetarget" placeholder="Value Target" />
+                </th>
+
+            </tr>
+            <tr class="table-head-bg-success">
+
+            <tr>
+                <th>DIC Name</th>
+                <th>Line Type</th>
+                <th>Date</th>
+                <th>Value Target per Day</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.DICName</td>
+                        <td>@user.LineType</td>
+                        <td>@user.Date</td>
+                        <td>@user.ValueTargetPerDay</td>
+
+                        <td>
+                            @if (user.Status == "Active")
+                            {
+                                <Text><span class="badge badge-success">Active</span></Text>
+                            }
+                            else
+                            {
+                                <text><span class="badge badge-danger">InActive</span></text>
+                            }
+                        </td>
+                        <td><a asp-action="Save" asp-route-id="@user.DailyValueGuid"><i class="fa fa-edit"></i></a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="pagination-wrapper">
+    <!-- Pagination on the left -->
+    <div class="pagination">
+        @if (Model.HasPreviousPage)
+        {
+            <a href="javascript:void(0);" class="page-link" data-page="@Convert.ToInt32(Model.PageNumber - 1)"><i class="fas fa-angle-left"></i></a>
+        }
+
+        @if (Model.PageCount > 1)
+        {
+            <!-- First Page -->
+            @if (Model.PageNumber > 3)
+            {
+                <a href="javascript:void(0);" class="page-link" data-page="1">1</a>
+                <span>...</span>
+            }
+
+            <!-- Show Current Page and Two Neighbors -->
+            @for (int i = Math.Max(1, Model.PageNumber - 1); i <= Math.Min(Model.PageCount, Model.PageNumber + 1); i++)
+            {
+                <a href="javascript:void(0);" data-page="@i" class="page-link @(i == Model.PageNumber ? "active" : "")">@i</a>
+            }
+
+            <!-- Ellipsis for Pages in Between -->
+            @if (Model.PageNumber < Model.PageCount - 2)
+            {
+                <span>...</span>
+                <a href="javascript:void(0);" data-page="@Model.PageCount">@Model.PageCount</a>
+            }
+        }
+
+        @if (Model.HasNextPage)
+        {
+            <a href="javascript:void(0);" class="page-link" data-page="@Convert.ToInt32(Model.PageNumber + 1)"><i class="fas fa-angle-right"></i></a>
+        }
+    </div>
+
+    <!-- Rows per page dropdown on the right -->
+    <div class="pagination-container">
+        <div class="rows-per-page">
+            <select id="rowsPerPage" class="form-select form-select-sm" style="width: auto; display: inline-block;">
+                @foreach (var size in new[] { 10, 25, 50, 100 })
+                {
+                    <option value="@size">@size</option>
+                }
+            </select>
+
+        </div>
+    </div>
+</div>

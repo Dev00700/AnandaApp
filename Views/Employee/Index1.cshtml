@@ -1,0 +1,163 @@
+﻿@*@model List<MyApp.Models.EmployeeDto>;*@
+
+
+@model IPagedList<MyApp.Models.EmployeeDto>;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using X.PagedList;
+<style>
+    .pagination a {
+        margin: 0 5px;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        text-decoration: none;
+        color: #007bff;
+    }
+
+        .pagination a.active {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+    .pagination span {
+        margin: 0 5px;
+        padding: 5px 10px;
+        color: #777;
+    }
+
+</style>
+
+<div class="container">
+    <div class="page-inner">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Basic</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            @*<table id="basic-datatables"
+               class="display table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Emp Code</th>
+                    <th>Emp Name</th>
+                    <th>Desig Id</th>
+                    <th>tabelue id</th>
+                    <th>manager id</th>
+                    <th>date of joining</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+
+
+
+                        <tr>
+                            <td>@item.EmployeeCode</td>
+                            <td>@item.EmployeeName</td>
+                            <td>@item.DesignationId</td>
+                            <td>@item.TableauDesignationId</td>
+                            <td>@item.ManagerId</td>
+                            <td>@item.DateofJoining</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>*@
+
+                            <table class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Emp Code</th>
+                                        <th>Emp Name</th>
+                                        <th>Desig Id</th>
+                                        <th>tabelue id</th>
+                                        <th>manager id</th>
+                                        <th>date of joining</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @if (Model != null && Model.Count > 0)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+
+
+
+                                            <tr>
+                                                <td>@item.EmployeeCode</td>
+                                                <td>@item.EmployeeName</td>
+                                                <td>@item.DesignationId</td>
+                                                <td>@item.TableauDesignationId</td>
+                                                <td>@item.ManagerId</td>
+                                                <td>@item.DateofJoining</td>
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                            <div class="pagination">
+                                @if (Model.HasPreviousPage)
+                                {
+                                    <a href="@Url.Action("Index", new { page = Model.PageNumber - 1 })">Previous</a>
+                                }
+
+                                @if (Model.PageCount > 1)
+                                {
+                                    <!-- First Page -->
+                                    @if (Model.PageNumber > 3)
+                                    {
+                                        <a href="@Url.Action("Index", new { page = 1 })">1</a>
+                                        <span>...</span>
+                                    }
+
+                                    <!-- Show Current Page and Two Neighbors -->
+                                    @for (int i = Math.Max(1, Model.PageNumber - 1); i <= Math.Min(Model.PageCount, Model.PageNumber + 1); i++)
+                                    {
+                                        <a href="@Url.Action("Index", new { page = i })" class="@(i == Model.PageNumber ? "active" : "")">@i</a>
+                                    }
+
+                                    <!-- Ellipsis for Pages in Between -->
+                                    @if (Model.PageNumber < Model.PageCount - 2)
+                                    {
+                                        <span>...</span>
+                                        <a href="@Url.Action("Index", new { page = Model.PageCount })">@Model.PageCount</a>
+                                    }
+                                }
+
+                                @if (Model.HasNextPage)
+                                {
+                                    <a href="@Url.Action("Index", new { page = Model.PageNumber + 1 })">Next</a>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

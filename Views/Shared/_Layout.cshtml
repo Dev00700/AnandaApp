@@ -1,0 +1,541 @@
+﻿@using MyApp.Models.Common;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Ananda Dairy</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+          name="viewport" />
+    <link rel="icon"
+          href="/img/logo.png"
+          type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+            google: { families: ["Public Sans:300,400,500,600,700"] },
+            custom: {
+                families: [
+                    "Font Awesome 5 Solid",
+                    "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands",
+                    "simple-line-icons",
+                ],
+                urls: ["/css/fonts.min.css"],
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            },
+        });
+        </script>
+    <style>
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 1050;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+       
+    </style>
+
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/css/bootstrapCustom.css" />
+    <link rel="stylesheet" href="/css/plugins.min.css" />
+    <link rel="stylesheet" href="/css/kaiadmin.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="/css/Custom.css" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="/css/demo.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="/js/core/jquery-3.7.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css" rel="stylesheet">
+  
+</head>
+<body>
+  
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar" data-background-color="dark">
+            <div class="sidebar-logo">
+                <!-- Logo Header -->
+                <div class="logo-header" data-background-color="dark">
+                    <a href="@Url.Action("Index","Home")" class="logo">
+                        <img src="/img/logo.png"
+                             alt="navbar brand"
+                             class="navbar-brand"
+                             height="20" width="100" />
+                    </a>
+                    <div class="nav-toggle">
+                        <button class="btn btn-toggle toggle-sidebar">
+                            <i class="gg-menu-right"></i>
+                        </button>
+                        <button class="btn btn-toggle sidenav-toggler">
+                            <i class="gg-menu-left"></i>
+                        </button>
+                    </div>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
+                </div>
+                <!-- End Logo Header -->
+            </div>
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-secondary">
+                        <li class="nav-item">
+                            <a data-bs-toggle="collapse"
+                               href="#dashboard"
+                               class="collapsed"
+                               aria-expanded="false">
+                                <i class="fas fa-home"></i>
+                                <p>Dashboard</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="dashboard">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="../../demo1/index.html">
+                                            <span class="sub-item">Dashboard 1</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                   
+                        @if (SessionManager.GetMenuList != null)
+                        {
+                            var i = 0;
+                            var j = 0;
+                            ViewBag.Menu= SessionManager.GetMenuList();
+                            var _menu = (ViewBag.Menu as List<MenuDto>).Where(x => x.ParentId == -1).OrderBy(x => x.SortOrder).ToList();
+                            foreach (var menu in _menu)
+                            {
+                                var _submenu = (ViewBag.Menu as List<MenuDto>).Where(x => x.ParentId == menu.MenuId).OrderBy(x => x.SortOrder).ToList();
+
+
+                                <li class="nav-item">
+                                    <a data-bs-toggle="collapse" href="#base+@i">
+                                        <i class="fas fa-layer-group"></i>
+                                        <p>@menu.MenuName</p>
+                                        <span class="caret"></span>
+                                    </a>
+                                    <div class="collapse" id="base+@i">
+                                        <ul class="nav nav-collapse">
+                                            @foreach (var submenu in _submenu)
+                                            {
+                                                if(string.IsNullOrEmpty(submenu.URL))
+                                                {
+                                                    var _parentsubmenu = (ViewBag.Menu as List<MenuDto>).Where(x => x.ParentId == submenu.MenuId).OrderBy(x => x.SortOrder).ToList();
+                                                    <li class="nav-item">
+                                                        <a data-bs-toggle="collapse" href="#base+@j">
+                                                        <i class="fas fa-layer-group"></i>
+                                                        <p>@submenu.MenuName</p>
+                                                        <span class="caret"></span>
+                                                    </a>
+                                                    </li>
+                                                    <div class="collapse" id="base+@j">
+                                                        <ul class="nav nav-collapse">
+                                                            @foreach (var childsubmenu in _parentsubmenu)
+                                                            {
+                                                                <li>
+                                                                    <a href="@childsubmenu.URL">
+                                                                        <span class="sub-item">@childsubmenu.MenuName</span>
+                                                                    </a>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                  
+                                                }
+                                                else{
+                                                <li>
+                                                    <a href="@submenu.URL">
+                                                        <span class="sub-item">@submenu.MenuName</span>
+                                                    </a>
+                                                    </li>
+                                                }
+                                                j++;
+                                            }
+                                        </ul>
+                                    </div>
+                                </li>
+                                i++;
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="main-panel">
+            <div class="main-header">
+                <div class="main-header-logo">
+                    <!-- Logo Header -->
+                    <div class="logo-header" data-background-color="dark">
+                        <a href="../index.html" class="logo">
+                            <img src="/img/kaiadmin/logo_light.svg"
+                                 alt="navbar brand"
+                                 class="navbar-brand" />
+                        </a>
+                        <div class="nav-toggle">
+                            <button class="btn btn-toggle toggle-sidebar">
+                                <i class="gg-menu-right"></i>
+                            </button>
+                            <button class="btn btn-toggle sidenav-toggler">
+                                <i class="gg-menu-left"></i>
+                            </button>
+                        </div>
+                        <button class="topbar-toggler more">
+                            <i class="gg-more-vertical-alt"></i>
+                        </button>
+                    </div>
+                    <!-- End Logo Header -->
+                </div>
+                <!-- Navbar Header -->
+                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+                    <div class="container-fluid">
+
+
+                        <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+
+
+
+
+                            <li class="nav-item topbar-user dropdown hidden-caret">
+                                <a class="dropdown-toggle profile-pic"
+                                   data-bs-toggle="dropdown"
+                                   href="#"
+                                   aria-expanded="false">
+                                    <div class="avatar-sm">
+                                        <img src="/img/profile.jpg"
+                                             alt="..."
+                                             class="avatar-img rounded-circle" />
+                                    </div>
+                                    <span class="profile-username">
+                                        <span class="op-7">Hi,</span>
+                                        <span class="fw-bold">@SessionManager.UserName.ToString()</span>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                    <div class="dropdown-user-scroll scrollbar-outer">
+                                        <li>
+                                            <div class="user-box">
+                                                <div class="avatar-lg">
+                                                    <img src="/img/profile.jpg"
+                                                         alt="image profile"
+                                                         class="avatar-img rounded" />
+                                                </div>
+                                                <div class="u-text">
+                                                <h4>@SessionManager.UserName.ToString()</h4>
+                                                    @* <p class="text-muted">hello@example.com</p> *@
+                                                    <a href="@Url.Action("ChangePassword","User")"
+                                                       class="btn btn-xs btn-secondary btn-sm">Change Password</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="dropdown-divider"></div>
+
+                                        <a class="dropdown-item" href="@Url.Action("Logout","Login")">Logout</a>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+            </div>
+
+            @RenderBody()
+
+            <div id="loader" style="display: none;">
+                <div class="loader-overlay">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <div class="container-fluid d-flex justify-content-between">
+                    <nav class="pull-left">
+                       @*  <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://www.themekita.com">
+                                    ThemeKita
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> Help </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> Licenses </a>
+                            </li>
+                        </ul> *@
+                    </nav>
+                    <div class="copyright">
+                        2024,All right reserved by Ananda @*  made with <i class="fa fa-heart heart text-danger"></i> by
+                        <a href="http://www.themekita.com">ThemeKita</a> *@
+                    </div>
+                    <div>
+                       @*  Distributed by
+                        <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>. *@
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Custom template | don't include it in your project! -->
+        <!-- End Custom template -->
+ 
+    @await RenderSectionAsync("Scripts", required: false);
+    <script src="/js/core/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            document.addEventListener("DOMContentLoaded", function () {
+                document.getElementById("pageLoader").style.display = "block";
+            });
+
+            // Hide loader when the page is fully loaded
+            window.addEventListener("load", function () {
+                document.getElementById("pageLoader").style.display = "none";
+            });
+           
+
+            $(function () {
+                $('.datepicker').datepicker({
+                    language: "es",
+                    autoclose: true,
+                    format: "dd/mm/yyyy",
+                   // startDate: new Date(),
+                    
+
+                });
+            });
+
+
+
+            function CallDatePicker() {
+                $('.datepicker').datepicker({
+                    language: "es",
+                    autoclose: true,
+                    format: "dd/mm/yyyy"
+                });
+            };
+
+            $('.js-example-basic-single').select2();
+           
+           
+
+            $("#basic-datatables").DataTable({});
+
+            $("#multi-filter-select").DataTable({
+                pageLength: 5,
+                initComplete: function () {
+                    this.api()
+                        .columns()
+                        .every(function () {
+                            var column = this;
+                            var select = $(
+                                '<select class="form-select"><option value=""></option></select>'
+                            )
+                                .appendTo($(column.footer()).empty())
+                                .on("change", function () {
+                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                    column
+                                        .search(val ? "^" + val + "$" : "", true, false)
+                                        .draw();
+                                });
+
+                            column
+                                .data()
+                                .unique()
+                                .sort()
+                                .each(function (d, j) {
+                                    select.append(
+                                        '<option value="' + d + '">' + d + "</option>"
+                                    );
+                                });
+                        });
+                },
+            });
+
+
+
+            $("#loader").show();
+
+
+            setTimeout(function () {
+                $("#loader").hide();
+            }, 500);
+
+            $('.numberonly').keypress(function (e) {
+
+                var charCode = (e.which) ? e.which : event.keyCode
+
+                if (String.fromCharCode(charCode).match(/[^0-9]/g))
+
+                    return false;
+
+            });
+
+            $('.decimalonly').keypress(function (e) {
+                var charCode = (e.which) ? e.which : event.keyCode;
+
+                // Allow numbers (0-9), one decimal point (.), and prevent multiple decimals
+                if (String.fromCharCode(charCode).match(/[^0-9.]/g) || ($(this).val().indexOf('.') !== -1 && charCode === 46)) {
+                    return false;
+                }
+            });
+
+            $(document).on('keypress', '.decimalonlytwodigit', function (e) {
+         
+                var charCode = (e.which) ? e.which : event.keyCode;
+
+                // Allow numbers (0-9), one decimal point (.), and prevent multiple decimals
+                if (String.fromCharCode(charCode).match(/[^0-9.]/g) || ($(this).val().indexOf('.') !== -1 && charCode === 46)) {
+                    return false;
+                }
+
+                // Restrict to two digits after the decimal point
+                var value = $(this).val();
+                if (value.indexOf('.') !== -1) {
+                    var decimalPart = value.split('.')[1];
+                    if (decimalPart && decimalPart.length >= 2) {
+                        return false;
+                    }
+                }
+            });
+            $(document).on('input', '.decimalonlytwodigit', function () {
+                var value = $(this).val();
+
+                // Allow only numbers and a single decimal point
+                var validValue = value.replace(/[^0-9.]/g, ''); // Remove invalid characters
+                var parts = validValue.split('.');
+                if (parts.length > 2) {
+                    // If more than one decimal point, keep only the first one
+                    validValue = parts[0] + '.' + parts.slice(1).join('');
+                }
+
+                // Restrict to two digits after the decimal point
+                if (validValue.indexOf('.') !== -1) {
+                    var decimalPart = validValue.split('.')[1];
+                    if (decimalPart && decimalPart.length > 2) {
+                        validValue = validValue.substring(0, validValue.indexOf('.') + 3);
+                    }
+                }
+
+                // Update the input value with the validated value
+                $(this).val(validValue);
+            });
+
+        });
+
+    </script>
+    <!--   Core JS Files   -->
+
+    <script src="/js/core/popper.min.js"></script>
+    <script src="/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Chart JS -->
+    @* <script src="/js/plugin/chart.js/chart.min.js"></script> *@
+
+    <!-- jQuery Sparkline -->
+    @* <script src="/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script> *@
+
+    <!-- Chart Circle -->
+    @* <script src="/js/plugin/chart-circle/circles.min.js"></script>
+ *@
+    <!-- Datatables -->
+    <script src="/js/plugin/datatables/datatables.min.js"></script>
+
+    <!-- Bootstrap Notify -->
+    @* <script src="/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script> *@
+
+    <!-- jQuery Vector Maps -->
+    @* <script src="/js/plugin/jsvectormap/jsvectormap.min.js"></script> *@
+    @* <script src="/js/plugin/jsvectormap/world.js"></script> *@
+
+    <!-- Google Maps Plugin -->
+    @* <script src="/js/plugin/gmaps/gmaps.js"></script> *@
+
+    <!-- Sweet Alert -->
+    <script src="/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="/js/kaiadmin.min.js"></script>
+
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    @* <script src="/js/setting-demo2.js"></script> *@
+
+    <script src="~/lib/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
+
+    <script>
+        function SuccessMsg(message,url) {
+            debugger;
+            swal(message, {
+                buttons: {
+                    confirm: {
+                        className: "btn btn-success",
+                    },
+                },
+            }).then((s) => {
+                location.href = url;
+            });
+        }
+        function ErrorMsg(message) {
+            debugger;
+            swal(message, {
+                buttons: {
+                    confirm: {
+                        className: "btn btn-danger",
+                    },
+                },
+            });
+        }
+        function WarningMsg(message) {
+            swal(message, {
+                icon: "warning",
+                buttons: {
+                    confirm: {
+                        className: "btn btn-warning",
+                    },
+                },
+            });
+        }
+      
+        function GetCurrentDate(){
+            const currentDate = new Date();
+            const formattedDate =
+                ('0' + currentDate.getDate()).slice(-2) + '/' +        // Day (2 digits)
+                ('0' + (currentDate.getMonth() + 1)).slice(-2) + '/' + // Month (2 digits)
+                currentDate.getFullYear();                             // Year (4 digits)
+            return formattedDate;
+        }
+    </script>
+</body>
+</html >
+

@@ -1,0 +1,109 @@
+﻿@model MyApp.Models.DailyValueTGTDto;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.HiddenFor(m => m.DailyValueGuid);
+
+<div class="container">
+    <div class="page-inner">
+        @using (Html.BeginForm("Save", "User", FormMethod.Post))
+        {
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Daily Value Target </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @if(Model.DailyValueGuid !=Guid.Empty){
+                                <div class="col-md-4 ">
+                                    <div class="form-group">
+                                        <label for="username"><span class="mandatory">*</span>DIC Name</label>
+                                        @Html.DropDownListFor(m => m.DICID, new SelectList(ViewBag.DicName, "Value", "Text"), new { @class = "form-control form-control-sm form-control-sm js-example-basic-single" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span>Line Type</label>
+                                        @Html.TextBoxFor(m => m.LineType, new { @class = "form-control form-control-sm", @placeholder = "Line Type" })
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span> Date</label>
+                                        <div class="datepicker date input-group">
+                                            @Html.TextBoxFor(model => model.Date, "{0:dd/MM/yyyy}", new { @class = "form-control form-control-sm", @maxlength = "100", @placeholder = "Date" })
+                                            <div class="input-group-append calend-pos">
+                                                <span class="input-group-text"> <img src="~/img/calendar_icon.svg" class="cal-h "></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Active</label><br />
+                                        @if (Model.DailyValueGuid != Guid.Empty)
+                                        {
+                                            @Html.CheckBoxFor(m => m.IsActive)
+                                        }
+                                        else
+                                        {
+                                            @Html.CheckBoxFor(m => m.IsActive, new { @disabled = "disabled" })
+                                        }
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span>Value Target Per Day</label>
+
+
+                                            @Html.TextBoxFor(m => m.ValueTargetPerDay, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Value Target" })
+
+                                    </div>
+
+                            </div>  
+                            }
+                            else{
+                                    <div class="table-responsive table-container">
+                                        <table id="dailyvaluetable" class="table  table-hover fixed-header-table">
+                                    <thead>
+                                        <tr>
+                                            <th>DIC Name</th>
+                                            <th>Line Type</th>
+                                            <th>Date</th>
+                                            <th>Value Target Per Day</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody id="dailyvaluebody"></tbody>
+                                </table>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            @if (Model.DailyValueGuid != Guid.Empty)
+                            {
+                                <button type="button" class="btn btn-success" id="save">@ViewBag.Button</button>
+                                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-success" id="savelist">Submit</button>
+                                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                            }
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/myapp.js/DailyValueTGT.js?var=@DateTime.Now"></script>
+
+

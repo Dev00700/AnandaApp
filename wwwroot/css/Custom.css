@@ -1,0 +1,84 @@
+﻿
+
+.datepicker {
+    /*z-index: 9999 !important;*/
+}
+.mandatory {
+    color: red !important;
+}
+.lstaddbtn {
+    float: right;
+    margin-top: 7px;
+}
+.txtfilter{
+    width:100px;
+}
+.pagination a {
+    margin: 4px 5px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #007bff;
+    /*border-radius: 16px;*/
+}
+
+    .pagination a.active {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+
+.pagination span {
+    margin: 0 5px;
+    padding: 5px 10px;
+    color: #777;
+}
+
+
+
+
+/* Container to restrict table width and height */
+.table-container {
+    max-height: 375px; /* Set desired height for scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ddd; /* Optional: Add a border for clarity */
+}
+
+/* Table styling */
+.fixed-header-table {
+    width: 100%; /* Ensure the table takes full width */
+    border-collapse: collapse;
+}
+
+    /* Fixed header styling */
+    .fixed-header-table thead th {
+        position: sticky;
+        top: 0; /* Keep header at the top of the scrollable area */
+        background: #f1f1f1; /* Optional: Background color for the header */
+        z-index: 2; /* Ensure header stays above the table body */
+        border: 1px solid #ddd; /* Optional: Add a border for clarity */
+        padding: 10px; /* Optional: Add some padding */
+        text-align: left; /* Align text as needed */
+    }
+
+    /* Table body styling */
+    .fixed-header-table tbody td {
+        border: 1px solid #ddd; /* Optional: Add a border for clarity */
+        padding: 10px; /* Optional: Add some padding */
+    }
+
+
+
+
+.pagination-wrapper {
+    display: flex;
+    justify-content: space-between; /* Ensures elements are spaced apart */
+    align-items: center; /* Vertically aligns items */
+}
+
+
+
+.pagination-container {
+    display: inline-block;
+    margin-left: auto; /* Pushes the container to the right */
+}

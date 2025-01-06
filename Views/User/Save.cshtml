@@ -1,0 +1,87 @@
+﻿@model MyApp.Models.UserDto;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.HiddenFor(m => m.UserGuid);
+
+<div class="container">
+    <div class="page-inner">
+        @using (Html.BeginForm("Save", "User", FormMethod.Post))
+        {
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">User Registration</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 ">
+                                    <div class="form-group">
+                                        <label for="username"><span class="mandatory">*</span>User Name</label>
+                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control form-control-sm", @placeholder = "User Name" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span>Password</label>
+                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-control-sm", @placeholder = "Password" })
+                                    </div>
+
+
+
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span> Email</label>
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-sm", @placeholder = "Email" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span>Role</label>
+
+                                        @Html.DropDownListFor(m => m.RoleId, new SelectList(ViewBag.Role, "Value", "Text"), new { @class = "form-control form-control-sm js-example-basic-single" })
+
+                                    </div>
+                                 
+                                   
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span>Mobile No.</label>
+
+
+                                        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control form-control-sm numberonly", @placeholder = "Mobile",@maxlength="10" })
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Active</label><br />
+                                        @if (Model.UserGuid != Guid.Empty)
+                                        {
+                                            @Html.CheckBoxFor(m => m.IsActive)
+                                        }
+                                        else
+                                        {
+                                            @Html.CheckBoxFor(m => m.IsActive, new { @disabled = "disabled" })
+                                        }
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="button" class="btn btn-success" id="saveUser">@ViewBag.Button</button>
+                            <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/myapp.js/User.js?var=@DateTime.Now"></script>
+
+

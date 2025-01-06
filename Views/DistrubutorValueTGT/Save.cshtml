@@ -1,0 +1,119 @@
+﻿@model MyApp.Models.DistrubutorValueTGTDto;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.HiddenFor(m => m.DistrubutorValueGuid);
+
+<div class="container">
+    <div class="page-inner">
+        @using (Html.BeginForm("Save", "User", FormMethod.Post))
+        {
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Line Type Wise Distrubutor Target</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @if(Model.DistrubutorValueGuid !=Guid.Empty){
+                                <div class="col-md-4 ">
+                                    <div class="form-group">
+                                        <label for="username"><span class="mandatory">*</span>DIC Name</label>
+                                        @Html.DropDownListFor(m => m.DICID, new SelectList(ViewBag.DicName, "Value", "Text"), new { @class = "form-control form-control-sm form-control-sm js-example-basic-single" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span>Line Type</label>
+                                        @Html.TextBoxFor(m => m.LineType, new { @class = "form-control form-control-sm", @placeholder = "Line Type" })
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span> Month</label>
+                                        <div class="datepicker date input-group">
+                                            @Html.TextBoxFor(model => model.Month, "{0:dd/MM/yyyy}", new { @class = "form-control form-control-sm", @maxlength = "100", @placeholder = "Date" })
+                                            <div class="input-group-append calend-pos">
+                                                <span class="input-group-text"> <img src="~/img/calendar_icon.svg" class="cal-h "></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Active</label><br />
+                                        @if (Model.DistrubutorValueGuid != Guid.Empty)
+                                        {
+                                            @Html.CheckBoxFor(m => m.IsActive)
+                                        }
+                                        else
+                                        {
+                                            @Html.CheckBoxFor(m => m.IsActive, new { @disabled = "disabled" })
+                                        }
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span>Line</label>
+
+
+                                        @Html.TextBoxFor(m => m.Line, new { @class = "form-control form-control-sm", @placeholder = "Line" })
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password"><span class="mandatory">*</span>DIS TGT</label>
+
+
+                                        @Html.TextBoxFor(m => m.DisTGT, new { @class = "form-control form-control-sm numberonly", @placeholder = "Line" })
+
+                                    </div>
+
+                                    </div>
+
+                                }
+                                else
+                                {
+                                    <div class="table-responsive table-container">
+                                        <table id="distrubutorvaluetable" class="table  table-hover fixed-header-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>DIC Name</th>
+                                                    <th>Line</th>
+                                                    <th>Line Type</th>
+                                                    <th>Month</th>
+                                                    <th>DIS TGT</th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody id="distrubutorvaluebody"></tbody>
+                                        </table>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            @if (Model.DistrubutorValueGuid != Guid.Empty)
+                            {
+                               <button type="button" class="btn btn-success" id="save">@ViewBag.Button</button>
+                                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-success" id="savelist">Submit</button>
+                                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                            }
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/myapp.js/DistrubutorValueTGT.js?var=@DateTime.Now"></script>
+
+
