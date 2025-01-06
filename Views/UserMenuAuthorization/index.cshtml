@@ -10,21 +10,19 @@
         @using (Html.BeginForm("Save", "Employee", FormMethod.Post))
         {
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="card-title">User Menu</h4>
-                                @Html.DropDownListFor(m => m.UserId, new SelectList(ViewBag.UserDetails, "Value", "Text"), new { @id = "dropdown-select", @class = "form-control form-control-sm form-control-sm js-example-basic-single" })
-
-                            </div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="card-title">User Menu</h4>
+                            @Html.DropDownListFor(m => m.UserId, new SelectList(ViewBag.UserDetails, "Value", "Text"), new { @id = "dropdown-select", @class = "form-control form-control-sm form-control-sm js-example-basic-single" })
 
                         </div>
 
-
                     </div>
 
+
                 </div>
+
             </div>
 
             <div class="table-responsive">

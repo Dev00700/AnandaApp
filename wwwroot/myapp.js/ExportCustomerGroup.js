@@ -9,27 +9,27 @@
     let isActive = $("#IsActive").is(":checked");
     let exportCustGrpGuid = $("#ExportCustGrpGuid").val();
 
-    if (dic.trim() == "0") {
+    if (dic.trim() == "0"||dic=="") {
         WarningMsg("Please enter DIC name");
         return false;
     }
-    else if (lineType.trim() == "") {
+    else if (lineType.trim() == "" || lineType=="") {
         WarningMsg("Please enter LineType");
         return false;
     }
-    else if (custCode.trim() == "") {
+    else if (custCode.trim() == "" || custCode == "") {
         WarningMsg("Please enter Customer Code");
         return false;
     }
-    else if (division.trim() == "0") {
+    else if (division.trim() == "0" || division == "") {
         WarningMsg("Please enter Division");
         return false;
     }
-    else if (lineDET.trim() == "0") {
+    else if (lineDET.trim() == "0" || lineDET == "") {
         WarningMsg("Please enter Line DET");
         return false;
     }
-    else if (lineType2.trim() == "0") {
+    else if (lineType2.trim() == "0" || lineType2 == "") {
         WarningMsg("Please enter Line Type2");
         return false;
     }
