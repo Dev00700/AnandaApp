@@ -17,7 +17,7 @@ namespace MyApp.Controllers
     {
         public DailyValueTGTController(IConfiguration configuration) : base(configuration)
         {
-                
+
         }
         public ActionResult Index(int? page = 1)
         {
@@ -26,7 +26,8 @@ namespace MyApp.Controllers
         }
         public ActionResult Save(string? id)
         {
-            ViewBag.DicName = DropDownService.BindDropDown(4,0);
+            ViewBag.DicName = DropDownService.BindDropDown(4, 0);
+            ViewBag.LineType = DropDownService.BindDropDown(8, 0);
             DailyValueTGTDto res = new DailyValueTGTDto();
             ViewBag.Button = "Submit";
             res.IsActive = true;
@@ -52,7 +53,7 @@ namespace MyApp.Controllers
             }
             return Json(result);
         }
-        public IActionResult GetPagedUser(int page, int rowperpage, string dicname, string linetype ,string date, string valuetarget)
+        public IActionResult GetPagedUser(int page, int rowperpage, string dicname, string linetype, string date, string valuetarget)
         {
             var pageSize = rowperpage != 0 ? rowperpage : PageRecordCount;
             var res = DailyValueTGTDtoService.GetAllList();
@@ -63,7 +64,7 @@ namespace MyApp.Controllers
                      { "LineType", linetype },
                      { "Date", date},
                      { "ValueTargetPerDay", valuetarget},
-                     
+
                    };
             IQueryable<DailyValueTGTDto> query = res.AsQueryable(); // employeeList is your data source
             query = query.ApplyFilters(filters);
@@ -73,15 +74,21 @@ namespace MyApp.Controllers
 
         public JsonResult GetDICName()
         {
-           var res = DropDownService.GetMasterDataForAddForm(6, 0);
-           return Json(res);
+            var res = DropDownService.GetMasterDataForAddForm(6, 0);
+            var res2 = DropDownService.BindDropDown(8, 0);
+            var combineresult = new
+            {
+                masterdata = res,
+                dropdown = res2
+            };
+            return Json(combineresult);
         }
         public ActionResult SaveList([FromBody] List<DailyValueTGTDto> res)
         {
             var result = (CommonResponseDto?)null;
-         
-                result = DailyValueTGTDtoService.SaveList(res);
-          
+
+            result = DailyValueTGTDtoService.SaveList(res);
+
             return Json(result);
         }
     }

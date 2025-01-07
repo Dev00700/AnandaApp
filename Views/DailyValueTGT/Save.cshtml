@@ -26,8 +26,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="password"><span class="mandatory">*</span>Line Type</label>
-                                        @Html.TextBoxFor(m => m.LineType, new { @class = "form-control form-control-sm", @placeholder = "Line Type" })
-                                    </div>
+                                            @Html.DropDownListFor(m => m.LineType, new SelectList(ViewBag.LineType, "Value", "Text"), new { @class = "form-control form-control-sm form-control-sm js-example-basic-single" })
+                                            
+                                              
+                                        
+                                        </div>
 
                                 </div>
                                 <div class="col-md-4">
@@ -105,5 +108,6 @@
 </div>
 
 <script src="~/myapp.js/DailyValueTGT.js?var=@DateTime.Now"></script>
+
 
 

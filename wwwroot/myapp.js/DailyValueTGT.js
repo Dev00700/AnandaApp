@@ -4,12 +4,14 @@
         type: "POST",
         contentType: "application/json",
         success: function (response) {
-         
-            let str = '<tr>';
+            debugger;
+            let str = "";
             if (response != null) {
-                for (var i = 0; i < response.length; i++){
-                    str += "<td> <input type='text' value='" + response[i].dicName + "'  id='dic_" + i + "'   data-dicid='" + response[i].dicId + "' class = 'form-control form-control-sm' disabled /></td>";
-                    str += "<td><input type='text'  id='linetype_" + i +"'  class = 'form-control form-control-sm'/></td> ";
+                for (var i = 0; i < response.masterdata.length; i++){
+                     str += "<tr>";
+                    str += "<td> <input type='text' value='" + response.masterdata[i].dicName + "'  id='dic_" + i + "'   data-dicid='" + response.masterdata[i].dicId + "' class = 'form-control form-control-sm' disabled /></td>";
+                    /*str += "<td><input type='text'  id='linetype_" + i +"'  class = 'form-control form-control-sm js-example-basic-single'/></td> ";*/
+                    str += "<td><select class='form-control form-control-sm form-control-sm js-example-basic-single lineType' id='linetype_" + i +"'></select> </td> ";
                     str += `<td> <div class="datepicker date input-group">
                                            <input type='text'  id='date_`+ i + `'  value="${GetCurrentDate()}" class = 'form-control form-control-sm'/>
                                             <div class="input-group-append calend-pos">
@@ -17,12 +19,28 @@
                                             </div>
                                         </div></td>`;
 
-                    str += "<td><input type='text'  id='value_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit' /> </td>";
+                    str += "<td><input type='text'  id='value_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
                     str +="</tr>"
 
                 }
+                let str2 = "";
+                for (var j = 0; j < response.dropdown.length; j++) {
+                   
+                    str2 += "<option value='" + response.dropdown[j].value + "'>" + response.dropdown[j].text +"</option>";
+                }
+
                 $("#dailyvaluebody").html('');
                 $("#dailyvaluebody").html(str);
+              
+                 $(".lineType").html(str2); 
+
+        
+
+                // Initialize Select2 for dynamically created elements
+                $(".js-example-basic-single").select2({
+                    width: '100%'  
+                });
+
                 $(".datepicker input").datepicker({
                     format: "dd/mm/yyyy", // Update as per your format
                     autoclose: true,
