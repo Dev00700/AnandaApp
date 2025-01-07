@@ -4,14 +4,14 @@
         type: "POST",
         contentType: "application/json",
         success: function (response) {
-            debugger;
+          
             let str = "";
             if (response != null) {
                 for (var i = 0; i < response.masterdata.length; i++){
                      str += "<tr>";
                     str += "<td> <input type='text' value='" + response.masterdata[i].dicName + "'  id='dic_" + i + "'   data-dicid='" + response.masterdata[i].dicId + "' class = 'form-control form-control-sm' disabled /></td>";
                     /*str += "<td><input type='text'  id='linetype_" + i +"'  class = 'form-control form-control-sm js-example-basic-single'/></td> ";*/
-                    str += "<td><select class='form-control form-control-sm form-control-sm js-example-basic-single lineType' id='linetype_" + i +"'></select> </td> ";
+                    str += "<td><select class='form-control form-control-sm form-control-sm js-example-basic-single linetype' id='linetype_" + i +"'></select> </td> ";
                     str += `<td> <div class="datepicker date input-group">
                                            <input type='text'  id='date_`+ i + `'  value="${GetCurrentDate()}" class = 'form-control form-control-sm'/>
                                             <div class="input-group-append calend-pos">
@@ -32,7 +32,7 @@
                 $("#dailyvaluebody").html('');
                 $("#dailyvaluebody").html(str);
               
-                 $(".lineType").html(str2); 
+                $(".linetype").html(str2); 
 
         
 
@@ -110,11 +110,12 @@ $("#save").on("click", function () {
 
 
 $("#savelist").on("click", function () {
+    debugger;
     let records = [];
     $("#dailyvaluebody tr").each(function () {
         // Extract values from the inputs in the current row
         const dicId = $(this).find("input[id^='dic']").data("dicid");
-        const lineType = $(this).find("input[id^='linetype']").val();
+        const lineType = $(this).find("select[id^='linetype']").val();
         const date = $(this).find("input[id^='date']").val();
         const value = $(this).find("input[id^='value']").val();
 
