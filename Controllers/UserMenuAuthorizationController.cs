@@ -72,7 +72,7 @@ namespace MyApp.Controllers
         public IActionResult Index(string? id)
         {
             UserMenuAuthorizationDto res = new UserMenuAuthorizationDto();
-            ViewBag.UserDetails = DropDownService.BindDropDown(4, 0);
+            ViewBag.UserDetails = DropDownService.BindDropDown(5, 0);
             ViewBag.Button = string.IsNullOrEmpty(id) ? "Submit" : "Update";
 
             
