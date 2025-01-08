@@ -1,0 +1,111 @@
+﻿@model MyApp.Models.ProductCategoryDto;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.HiddenFor(m=>m.ProductCategoryGuid);
+
+<div class="container">
+    <div class="page-inner">
+        @using (Html.BeginForm("Save", "ProductCategory", FormMethod.Post))
+        {
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Product Category</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 ">
+                                    <div class="form-group">
+                                        <label for="materialcode"><span class="mandatory">*</span>Category Code</label>
+                                        @Html.TextBoxFor(m => m.ProductCategoryCode, new { @class = "form-control form-control-sm", @placeholder = "Category Code", onfocusout = "return ChkProductCategoryCode()" })
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                        <label for="zsgrp2">ZSGRP2</label>
+                                        @Html.TextBoxFor(m => m.ZSGRP2, new { @class = "form-control form-control-sm", @placeholder = "ZSGRP2" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="producttype"><span class="mandatory">*</span>Product Type</label>
+                                        @Html.TextBoxFor(m => m.ProductType, new { @class = "form-control form-control-sm", @placeholder = "Product Type" })
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-md-4 ">
+
+                                    <div class="form-group">
+                                        <label for="zmgrp"><span class="mandatory">*</span>ZMGRP</label>
+                                        @Html.TextBoxFor(m => m.ZMGRP, new { @class = "form-control form-control-sm", @placeholder = "ZMGRP" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="zsgrp3">ZSGRP3</label>
+                                        @Html.TextBoxFor(m => m.ZSGRP3, new { @class = "form-control form-control-sm", @placeholder = "ZSGRP3" })
+                                    </div>
+
+
+                                  
+
+                                    <div class="form-group">
+                                        <label for="packcontains">Contains in Pack</label>
+                                        @Html.TextBoxFor(m => m.PackContains, new { @class = "form-control form-control-sm", @placeholder = "Contains in Pack" })
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4 ">
+
+                                    <div class="form-group">
+                                        <label for="zsgrp1">ZSGRP1</label>
+                                        @Html.TextBoxFor(m => m.ZSGRP1, new { @class = "form-control form-control-sm", @placeholder = "ZSGRP1" })
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label for="zsgrp4">ZSGRP4</label>
+                                        @Html.TextBoxFor(m => m.ZSGRP4, new { @class = "form-control form-control-sm", @placeholder = "ZSGRP4" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="conversionratio">Conversion Ratio</label>
+                                        @Html.TextBoxFor(m => m.ConversionRatio, new { @class = "form-control form-control-sm", @placeholder = "Conversion Ratio" })
+                                    </div>
+
+                                   
+                                </div>
+                                <div class="col-md-4 ">
+                                    <div class="form-group">
+                                        <label for="active">Active</label><br />
+                                        @if (Model.ProductCategoryGuid != Guid.Empty)
+                                        {
+                                            @Html.CheckBoxFor(m => m.IsActive)
+                                        }
+                                        else
+                                        {
+                                            @Html.CheckBoxFor(m => m.IsActive, new { @disabled = "disabled" })
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="button" class="btn btn-success" id="saveProductCategory">@ViewBag.Button</button>
+                            <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/myapp.js/ProductCategory.js?var=@DateTime.Now"></script>
+
+
