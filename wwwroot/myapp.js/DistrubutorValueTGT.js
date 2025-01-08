@@ -4,13 +4,15 @@
         type: "POST",
         contentType: "application/json",
         success: function (response) {
-           
+            debugger;
             let str = '<tr>';
             if (response != null) {
-                for (var i = 0; i < response.length; i++) {
-                    str += "<td> <input type='text' value='" + response[i].dicName + "'  id='dic_" + i + "'   data-dicid='" + response[i].dicId + "' class = 'form-control form-control-sm' disabled /></td>";
-                    str += "<td><input type='text'  id='line_" + i + "'  class = 'form-control form-control-sm'/></td> ";
-                    str += "<td><input type='text'  id='linetype_" + i + "'  class = 'form-control form-control-sm'/></td> ";
+                for (var i = 0; i < response.masterdata.length; i++) {
+                    str += "<td> <input type='text' value='" + response.masterdata[i].dicName + "'  id='dic_" + i + "'   data-dicid='" + response.masterdata[i].dicId + "' class = 'form-control form-control-sm' disabled /></td>";
+                    /* str += "<td><input type='text'  id='line_" + i + "'  class = 'form-control form-control-sm'/></td> ";*/
+                    str += "<td><select class='form-control form-control-sm form-control-sm js-example-basic-single line' id='line_" + i +"'></select> </td> ";
+                    /* str += "<td><input type='text'  id='linetype_" + i + "'  class = 'form-control form-control-sm'/></td> ";*/
+                    str += "<td><select class='form-control form-control-sm form-control-sm js-example-basic-single linetype' id='linetype_" + i +"'></select> </td>";
                     str += `<td> <div class="datepicker date input-group">
                                            <input type='text'  id='date_`+ i + `'  value="${GetCurrentDate()}" class = 'form-control form-control-sm'/>
                                             <div class="input-group-append calend-pos">
@@ -22,8 +24,26 @@
                     str += "</tr>"
 
                 }
+                let str2 = "";
+                for (var j = 0; j < response.line.length; j++) {
+
+                    str2 += "<option value='" + response.line[j].value + "'>" + response.line[j].text + "</option>";
+                }
+                let str3 = "";
+                for (var k = 0; k < response.linetype.length; k++) {
+
+                    str3 += "<option value='" + response.linetype[k].value + "'>" + response.linetype[k].text + "</option>";
+                }
+
                 $("#distrubutorvaluebody").html('');
                 $("#distrubutorvaluebody").html(str);
+                $(".line").html(str2); 
+                $(".linetype").html(str3); 
+
+                // Initialize Select2 for dynamically created elements
+                $(".js-example-basic-single").select2({
+                    width: '100%'
+                });
                 $(".datepicker input").datepicker({
                     format: "dd/mm/yyyy", // Update as per your format
                     autoclose: true,
@@ -104,8 +124,8 @@ $("#savelist").on("click", function () {
     $("#distrubutorvaluebody tr").each(function () {
         // Extract values from the inputs in the current row
         const dicId = $(this).find("input[id^='dic']").data("dicid");
-        const line = $(this).find("input[id^='line']").val();
-        const lineType = $(this).find("input[id^='linetype']").val();
+        const line = $(this).find("select[id^='line']").val();
+        const lineType = $(this).find("select[id^='linetype']").val();
         const date = $(this).find("input[id^='date']").val();
         const value = $(this).find("input[id^='value']").val();
 

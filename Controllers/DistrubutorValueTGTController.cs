@@ -72,7 +72,15 @@ namespace MyApp.Controllers
         public JsonResult GetDICName()
         {
             var res = DropDownService.GetMasterDataForAddForm(6, 0);
-            return Json(res);
+            var res2 = DropDownService.BindDropDown(8, 0);
+            var res3 = DropDownService.BindDropDown(9, 0);
+            var combineresult = new
+            {
+                masterdata = res,
+                linetype = res2,
+                line = res3
+            };
+            return Json(combineresult);
         }
 
         [HttpPost]
