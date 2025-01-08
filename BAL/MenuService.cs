@@ -22,7 +22,7 @@ namespace MyApp.BAL
                 string _proc = "Proc_Menu";
                 var queryparameter = new DynamicParameters();
                 queryparameter.Add("@ProcId", 1);
-                queryparameter.Add("@userId", 1);
+                queryparameter.Add("@userId", SessionManager.UserId);
                 menuDto = DBHelperDapper.GetAllModelList<MenuDto>(_proc, queryparameter);
                 SessionManager.SetMenuList(menuDto);
             }
