@@ -25,6 +25,11 @@ $("#saveProductCategory").on("click", function () {
         return false;
     }
 
+    else if (prdtype.trim() == "") {
+        WarningMsg("Please enter product type");
+        return false;
+    }
+
     let req = JSON.stringify({ ProductCategoryCode: prdcatcode, ZMGRP: zmgrp, ZSGRP1: zsgrp1, ZSGRP2: zsgrp2, ZSGRP3: zsgrp3, ZSGRP4: zsgrp4, ProductType: prdtype, PackContains: packcontains, ConversionRatio: conversionratio, IsActive: isactive, ProductCategoryGuid: prdcatguid });
     $.ajax({
         url: "/ProductCategory/Save",

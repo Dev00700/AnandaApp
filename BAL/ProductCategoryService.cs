@@ -39,7 +39,7 @@ namespace MyApp.BAL
                 queryparameter.Add("@ProductType", productCategory.ProductType);
                 queryparameter.Add("@PackContains", productCategory.PackContains);
                 queryparameter.Add("@ConversionRatio", productCategory.ConversionRatio);
-                queryparameter.Add("@createdBy", SessionManager.UserId);
+                queryparameter.Add("@CreatedBy", SessionManager.UserId);
                 queryparameter.Add("@IsActive", productCategory.IsActive);
                 queryparameter.Add("@createdBy", SessionManager.UserId);
                 CommonFunction.Printparameter(queryparameter, "Product Category paramer for saving:");//FOR WRITE LOG'
@@ -80,7 +80,7 @@ namespace MyApp.BAL
                 queryparameter.Add("@ProductType", productCategory.ProductType);
                 queryparameter.Add("@PackContains", productCategory.PackContains);
                 queryparameter.Add("@ConversionRatio", productCategory.ConversionRatio);
-                queryparameter.Add("@ModifiedBy", SessionManager.UserId);
+                queryparameter.Add("@CreatedBy", SessionManager.UserId);
                 queryparameter.Add("@IsActive", productCategory.IsActive);
                 queryparameter.Add("@PrdCatGuid", productCategory.ProductCategoryGuid);
                 CommonFunction.Printparameter(queryparameter, "Product Category paramer for updating:");//FOR WRITE LOG'

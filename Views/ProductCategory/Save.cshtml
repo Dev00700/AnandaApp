@@ -19,19 +19,29 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4 ">
-                                    <div class="form-group">
-                                        <label for="materialcode"><span class="mandatory">*</span>Category Code</label>
-                                        @Html.TextBoxFor(m => m.ProductCategoryCode, new { @class = "form-control form-control-sm", @placeholder = "Category Code", onfocusout = "return ChkProductCategoryCode()" })
-                                    </div>
-                                   
+
+                                    @if (Model.ProductCategoryGuid != Guid.Empty)
+                                    {
+                                        <div class="form-group">
+                                            <label for="materialcode"><span class="mandatory">*</span>Category Code</label>
+                                            @Html.TextBoxFor(m => m.ProductCategoryCode, new { @class = "form-control form-control-sm numberonly", @placeholder = "Category Code", onfocusout = "return ChkProductCategoryCode()" , @disabled= true})
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="form-group">
+                                            <label for="materialcode"><span class="mandatory">*</span>Category Code</label>
+                                            @Html.TextBoxFor(m => m.ProductCategoryCode, new { @class = "form-control form-control-sm numberonly", @placeholder = "Category Code", onfocusout = "return ChkProductCategoryCode()" })
+                                        </div>
+                                    }
                                     <div class="form-group">
                                         <label for="zsgrp2">ZSGRP2</label>
-                                        @Html.TextBoxFor(m => m.ZSGRP2, new { @class = "form-control form-control-sm", @placeholder = "ZSGRP2" })
+                                        @Html.TextBoxFor(m => m.ZSGRP2, new { @class = "form-control form-control-sm", @placeholder = "ZSGRP2", @maxlength = "200" })
                                     </div>
 
                                     <div class="form-group">
                                         <label for="producttype"><span class="mandatory">*</span>Product Type</label>
-                                        @Html.TextBoxFor(m => m.ProductType, new { @class = "form-control form-control-sm", @placeholder = "Product Type" })
+                                        @Html.TextBoxFor(m => m.ProductType, new { @class = "form-control form-control-sm", @placeholder = "Product Type", @maxlength="50" })
                                     </div>
 
 
