@@ -1,45 +1,39 @@
 ﻿$(document).ready(function () {
     $.ajax({
-        url: "/DailyValueTGT/GetDICName",
+        url: "/CattleFeedTGT/GetPlantName",
         type: "POST",
         contentType: "application/json",
         success: function (response) {
-          
             let str = "";
             if (response != null) {
-                for (var i = 0; i < response.masterdata.length; i++){
-                     str += "<tr>";
-                    str += "<td> <input type='text' value='" + response.masterdata[i].dicName + "'  id='dic_" + i + "'   data-dicid='" + response.masterdata[i].dicId + "' class = 'form-control form-control-sm' disabled /></td>";
-                    /*str += "<td><input type='text'  id='linetype_" + i +"'  class = 'form-control form-control-sm js-example-basic-single'/></td> ";*/
-                    str += "<td><select class='form-control form-control-sm form-control-sm js-example-basic-single linetype' id='linetype_" + i +"'></select> </td> ";
+                for (var i = 0; i < response.masterdata.length; i++) {
+                    str += "<tr>";
+                    str += "<td><input type='text'  id='code_" + i + "' class = 'form-control form-control-sm numberonly'/></td> ";
+                    str += "<td> <input type='text' value='" + response.masterdata[i].plantCode + "'  id='plant_" + i + "'   data-plantcodeid='" + response.masterdata[i].plantCodeId + "' class = 'form-control form-control-sm' disabled /></td>";
+                    str += "<td> <input type='text' value='" + response.masterdata[i].plantName + "'  id='plantName_" + i + "'    class = 'form-control form-control-sm' disabled /></td>";
                     str += `<td> <div class="datepicker date input-group">
-                                           <input type='text'  id='date_`+ i + `'  value="${GetCurrentDate()}" class = 'form-control form-control-sm'/>
+                                           <input type='text'  id='Fromdate_`+ i + `'  value="${GetCurrentDate()}" class = 'form-control form-control-sm'/>
                                             <div class="input-group-append calend-pos">
                                                 <span class="input-group-text"> <img src="../img/calendar_icon.svg" class="cal-h "></span>
                                             </div>
                                         </div></td>`;
 
-                    str += "<td><input type='text'  id='value_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str +="</tr>"
+                    str += `<td> <div class="datepicker date input-group">
+                                           <input type='text'  id='Todate_`+ i + `'  value="${GetCurrentDate()}" class = 'form-control form-control-sm'/>
+                                            <div class="input-group-append calend-pos">
+                                                <span class="input-group-text"> <img src="../img/calendar_icon.svg" class="cal-h "></span>
+                                            </div>
+                                        </div></td>`;
+
+                    str += "<td><input type='text'  id='weekno_" + i + "' class = 'form-control form-control-sm' disabled='true'/> </td>";
+
+                    str += "<td><input type='text'  id='tgtvalue_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "</tr>"
 
                 }
-                let str2 = "";
-                for (var j = 0; j < response.dropdown.length; j++) {
-                   
-                    str2 += "<option value='" + response.dropdown[j].value + "'>" + response.dropdown[j].text +"</option>";
-                }
-
-                $("#dailyvaluebody").html('');
-                $("#dailyvaluebody").html(str);
-              
-                $(".linetype").html(str2); 
-
-        
-
-                // Initialize Select2 for dynamically created elements
-                $(".js-example-basic-single").select2({
-                    width: '100%'  
-                });
+                
+                $("#cattlefeedvaluebody").html('');
+                $("#cattlefeedvaluebody").html(str);
 
                 $(".datepicker input").datepicker({
                     format: "dd/mm/yyyy", // Update as per your format
@@ -139,21 +133,20 @@ $("#savelist").on("click", function () {
             data: JSON.stringify(records),
             success: function (response) {
                 if (response != null) {
-                                if (response.flag == 1) {
-                                    SuccessMsg(response.message, "/DailyValueTGT/Index");
-                                }
-                                else if (response.flag == 2) {
-                                    ErrorMsg(response.message);
-                                }
-                            }
+                    if (response.flag == 1) {
+                        SuccessMsg(response.message, "/DailyValueTGT/Index");
+                    }
+                    else if (response.flag == 2) {
+                        ErrorMsg(response.message);
+                    }
+                }
             },
             error: function () {
                 ErrorMsg("An error occurred while saving records.");
             }
         });
     }
-    else
-    {
+    else {
         WarningMsg("No valid records to save.");
     }
 });
@@ -200,7 +193,7 @@ $(document).on("keyup", ".filter-input", function () {
 });
 
 function loadTable(page, focusedColumn, focusedValue, rowsPerPage) {
-  
+
     var filters = {
         dicname: $('input[data-column="dicname"]').val(),
         linetype: $('input[data-column="linetype"]').val(),
@@ -219,7 +212,7 @@ function loadTable(page, focusedColumn, focusedValue, rowsPerPage) {
             valuetarget: filters.valuetarget,
         },
         success: function (data) {
-         
+
             $('#dailyvalueTableContainer').html(data);
 
             // Restore filter values and focus

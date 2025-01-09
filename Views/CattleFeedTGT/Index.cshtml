@@ -1,0 +1,44 @@
+﻿@model IPagedList<MyApp.Models.CattleFeedTGTDto>;
+@using X.PagedList;
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="page-inner">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="card-title">Cattle Feed Target List</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <a asp-action="Save" class="btn btn-success btn-sm lstaddbtn">Add</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div id="dailyvalueTableContainer">
+                                @Html.Partial("_CattleFeedTGT", Model)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script src="~/myapp.js/CattleFeedTGT.js?var=@DateTime.Now"></script>
