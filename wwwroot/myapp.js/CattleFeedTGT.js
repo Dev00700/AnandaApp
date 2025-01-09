@@ -25,7 +25,7 @@
                                             </div>
                                         </div></td>`;
 
-                    str += "<td><input type='text'  id='weekno_" + i + "' class = 'form-control form-control-sm' disabled='true'/> </td>";
+                    str += "<td><input type='text'  id='weekno_" + i + "' value='W25' class = 'form-control form-control-sm' disabled='true'/> </td>";
 
                     str += "<td><input type='text'  id='tgtvalue_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
                     str += "</tr>"
@@ -106,20 +106,24 @@ $("#save").on("click", function () {
 $("#savelist").on("click", function () {
     debugger;
     let records = [];
-    $("#dailyvaluebody tr").each(function () {
+    $("#cattlefeedvaluebody tr").each(function () {
         // Extract values from the inputs in the current row
-        const dicId = $(this).find("input[id^='dic']").data("dicid");
-        const lineType = $(this).find("select[id^='linetype']").val();
-        const date = $(this).find("input[id^='date']").val();
-        const value = $(this).find("input[id^='value']").val();
+        const code = $(this).find("input[id^='code']").val();
+        const plantcodeid = $(this).find("input[id^='plant']").data("plantcodeid");
+        const Fromdate = $(this).find("input[id^='Fromdate']").val();
+        const Todate = $(this).find("input[id^='Todate']").val();
+        const weekno = $(this).find("input[id^='weekno']").val();
+        const tgtvalue = $(this).find("input[id^='tgtvalue']").val();
 
         // Create an object for the current row's data
-        if (dicId && lineType && date && value) { // Only add valid rows
+        if (code && plantcodeid && Fromdate && Todate && weekno ) { // Only add valid rows
             records.push({
-                DICID: dicId,
-                LineType: lineType,
-                Date: date,
-                ValueTargetPerDay: value
+                Code: code,
+                PlantCodeId: plantcodeid,
+                FromDate: Fromdate,
+                ToDate: Todate,
+                WeekNo: weekno,
+                TGTValue: tgtvalue
             });
         }
     });
@@ -127,14 +131,14 @@ $("#savelist").on("click", function () {
     if (records.length > 0) {
         // Send the data to the server using AJAX
         $.ajax({
-            url: "/DailyValueTGT/SaveList",
+            url: "/CattleFeedTGT/SaveList",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(records),
             success: function (response) {
                 if (response != null) {
                     if (response.flag == 1) {
-                        SuccessMsg(response.message, "/DailyValueTGT/Index");
+                        SuccessMsg(response.message, "/CattleFeedTGT/Index");
                     }
                     else if (response.flag == 2) {
                         ErrorMsg(response.message);
@@ -153,7 +157,7 @@ $("#savelist").on("click", function () {
 
 // Cancel button
 $("#cancel").click(function () {
-    window.location.href = "/DailyValueTGT/Index";
+    window.location.href = "/CattleFeedTGT/Index";
 });
 
 //============== FOR PAGENATION=============
@@ -195,31 +199,40 @@ $(document).on("keyup", ".filter-input", function () {
 function loadTable(page, focusedColumn, focusedValue, rowsPerPage) {
 
     var filters = {
-        dicname: $('input[data-column="dicname"]').val(),
-        linetype: $('input[data-column="linetype"]').val(),
-        date: $('input[data-column="date"]').val(),
-        valuetarget: $('input[data-column="valuetarget"]').val(),
+        Code: $('input[data-column="Code"]').val(),
+        PlantCode: $('input[data-column="PlantCode"]').val(),
+        PlantName: $('input[data-column="PlantName"]').val(),
+        FromDate: $('input[data-column="FromDate"]').val(),
+        ToDate: $('input[data-column="ToDate"]').val(),
+        WeekNo: $('input[data-column="WeekNo"]').val(),
+        TGTValue: $('input[data-column="TGTValue"]').val(),
     };
 
     $.ajax({
-        url: '/DailyValueTGT/GetPagedUser',
+        url: '/CattleFeedTGT/GetPagedUser',
         data: {
             page: page,
             rowperpage: rowsPerPage,
-            dicname: filters.dicname,
-            linetype: filters.linetype,
-            Date: filters.date,
-            valuetarget: filters.valuetarget,
+            Code: filters.Code,
+            PlantCode: filters.PlantCode,
+            PlantName: filters.PlantName,
+            FromDate: filters.FromDate,
+            ToDate: filters.ToDate,
+            WeekNo: filters.WeekNo,
+            TGTValue: filters.TGTValue,
         },
         success: function (data) {
 
-            $('#dailyvalueTableContainer').html(data);
+            $('#cattlefeedTableContainer').html(data);
 
             // Restore filter values and focus
-            $('input[data-column="dicname"]').val(filters.dicname);
-            $('input[data-column="linetype"]').val(filters.linetype);
-            $('input[data-column="date"]').val(filters.date);
-            $('input[data-column="valuetarget"]').val(filters.valuetarget);
+            $('input[data-column="Code"]').val(filters.Code);
+            $('input[data-column="PlantCode"]').val(filters.PlantCode);
+            $('input[data-column="PlantName"]').val(filters.PlantName);
+            $('input[data-column="FromDate"]').val(filters.FromDate);
+            $('input[data-column="ToDate"]').val(filters.ToDate);
+            $('input[data-column="WeekNo"]').val(filters.WeekNo);
+            $('input[data-column="TGTValue"]').val(filters.TGTValue);
 
             // Restore focus to the previously focused input field
             if (focusedColumn) {

@@ -7,6 +7,7 @@ using System.Linq;
 using System;
 using X.PagedList.Extensions;
 using MyApp.Models.Base;
+using MyApp.Models.Common;
 
 namespace MyApp.Controllers
 {
@@ -46,17 +47,21 @@ namespace MyApp.Controllers
             }
             return Json(result);
         }
-        public IActionResult GetPagedUser(int page, int rowperpage, string dicname, string linetype, string date, string valuetarget)
+        public IActionResult GetPagedUser(int page, int rowperpage, string Code, string PlantCode, string PlantName, string FromDate,
+            string ToDate, string WeekNo, string TGTValue)
         {
             var pageSize = rowperpage != 0 ? rowperpage : PageRecordCount;
             var res = CattleFeedTGTService.GetAllList();
 
             var filters = new Dictionary<string, string>
                    {
-                     { "DICName", dicname },
-                     { "LineType", linetype },
-                     { "Date", date},
-                     { "ValueTargetPerDay", valuetarget},
+                     { "Code", Code },
+                     { "PlantCode", PlantCode },
+                     { "PlantName", PlantName},
+                     { "FromDate", FromDate},
+                     { "ToDate", ToDate},
+                     { "WeekNo", WeekNo},
+                     { "TGTValue", TGTValue},
                    };
 
             IQueryable<CattleFeedTGTDto> query = res.AsQueryable(); 
