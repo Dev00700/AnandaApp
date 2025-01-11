@@ -15,12 +15,16 @@ namespace MyApp.Controllers
     [CustomAuthenticationFilter]
     public class DailyValueTGTController : BaseController
     {
+        private string MenuCode = "M0007";
         public DailyValueTGTController(IConfiguration configuration) : base(configuration)
         {
 
         }
         public ActionResult Index(int? page = 1)
         {
+            var authres = CommonService.GetAddEditAuthorization(MenuCode);
+            ViewBag.Add = authres.ForAdd;
+            ViewBag.Edit= authres.ForEdit;
             List<DailyValueTGTDto> res = DailyValueTGTDtoService.GetAllList();
             return View(res.ToPagedList(page ?? 1, PageRecordCount));
         }

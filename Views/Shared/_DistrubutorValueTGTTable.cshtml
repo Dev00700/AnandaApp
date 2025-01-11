@@ -26,7 +26,10 @@
                 <th>Month</th>
                 <th>DIS TGT</th>
                 <th>Status</th>
+                 @if (ViewBag.Edit != null && ViewBag.Edit == true)
+                            {
                 <th>Actions</th>
+                            }
             </tr>
 
         </thead>
@@ -51,7 +54,13 @@
                                 <text><span class="badge badge-danger">InActive</span></text>
                             }
                         </td>
-                        <td><a asp-action="Save" asp-route-id="@user.DistrubutorValueGuid"><i class="fa fa-edit"></i></a></td>
+                        <td>
+                            @if (ViewBag.Edit != null && ViewBag.Edit == true)
+                            {
+                            <a asp-action="Save" asp-route-id="@user.DistrubutorValueGuid"><i class="fa fa-edit"></i></a>
+                            
+                            }
+                            </td>
                     </tr>
                 }
             }

@@ -14,12 +14,16 @@ namespace MyApp.Controllers
     [CustomAuthenticationFilter]
     public class DistrubutorValueTGTController : BaseController
     {
+        private string MenuCode = "M0008";
         public DistrubutorValueTGTController(IConfiguration configuration) : base(configuration)
         {
         }
 
         public ActionResult Index(int? page = 1)
         {
+            var authres = CommonService.GetAddEditAuthorization(MenuCode);
+            ViewBag.Add = authres.ForAdd;
+            ViewBag.Edit = authres.ForEdit;
             List<DistrubutorValueTGTDto> res = DistrubutorValueTGTDtoService.GetALLList();
             return View(res.ToPagedList(page ?? 1, PageRecordCount));
         }

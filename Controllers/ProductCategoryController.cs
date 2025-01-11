@@ -13,6 +13,7 @@ namespace MyApp.Controllers
     [CustomAuthenticationFilter]
     public class ProductCategoryController : BaseController
     {
+        private string MenuCode = "M0011";
         public ProductCategoryController(IConfiguration configuration) : base(configuration)
         {
         }
@@ -57,7 +58,9 @@ namespace MyApp.Controllers
         [HttpGet]
         public IActionResult Index(int? page)
         {
-
+            var authres = CommonService.GetAddEditAuthorization(MenuCode);
+            ViewBag.Add = authres.ForAdd;
+            ViewBag.Edit = authres.ForEdit;
             List<ProductCategoryDto> res = ProductCategoryService.GetProductCategoryList();
             return View(res.ToPagedList(page ?? 1, PageRecordCount));
         }
