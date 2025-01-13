@@ -72,7 +72,7 @@ namespace MyApp.Controllers
                    };
             IQueryable<DailyValueTGTDto> query = res.AsQueryable(); // employeeList is your data source
             query = query.ApplyFilters(filters);
-            return PartialView("_DailyValueTGTDto", query.ToPagedList(page, pageSize));
+            return PartialView("_DailyValueTGTTable", query.ToPagedList(page, pageSize));
 
         }
 

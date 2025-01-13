@@ -1,4 +1,4 @@
-﻿@model IPagedList<MyApp.Models.DailyValueTGTDto>;
+﻿@model IPagedList<MyApp.Models.ZoneWiseDataDto>;
 @using X.PagedList;
 
 
@@ -15,7 +15,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="card-title">Daily Value Target List</h4>
+                                <h4 class="card-title">Week Number List</h4>
                             </div>
                             <div class="col-md-6">
                                 @if (ViewBag.Add != null && ViewBag.Add == true)
@@ -32,8 +32,8 @@
 
 
 
-                            <div id="dailyvalueTableContainer">
-                                @Html.Partial("_DailyValueTGTTable", Model)
+                            <div id="zonewisedataTableContainer">
+                                @Html.Partial("_ZoneWiseDataTable", Model)
                             </div>
 
                         </div>
@@ -54,4 +54,4 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-<script src="~/myapp.js/DailyValueTGT.js?var=@DateTime.Now"></script>
+<script src="~/myapp.js/ZoneWiseData.js?var=@DateTime.Now"></script>

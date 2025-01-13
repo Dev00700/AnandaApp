@@ -327,6 +327,8 @@
                    // startDate: new Date(),
                     
 
+                }).on("changeDate", function () {
+                    $(this).trigger("change"); // Trigger change event manually
                 });
             });
 
