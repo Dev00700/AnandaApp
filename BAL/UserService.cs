@@ -81,5 +81,18 @@ namespace MyApp.BAL
             res = DBHelperDapper.GetAllModel<CommonResponseDto>(_proc, queryparameter);
             return res;
         }
+
+        public static CommonResponseDto UpdatePasswordByAdmin(UserDto user)
+        {
+            CommonResponseDto res = new CommonResponseDto();
+            string _proc = "Proc_User";
+            var queryparameter = new DynamicParameters();
+            queryparameter.Add("@ProcId", 6);
+            queryparameter.Add("@password", Crypto.Encrypt(user.Password));
+            queryparameter.Add("@UserId", user.UserId);
+            CommonFunction.Printparameter(queryparameter, "User parameter for updating:");//FOR WRITE LOG'
+            res = DBHelperDapper.GetAllModel<CommonResponseDto>(_proc, queryparameter);
+            return res;
+        }
     }
 }

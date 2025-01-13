@@ -23,7 +23,10 @@
                 <th>ZMGRP</th>
                 <th>ZSGRP1</th>
                 <th>Active</th>
+                 @if (ViewBag.Edit != null && ViewBag.Edit == true)
+            {
                 <th>Action</th>
+            }
             </tr>
         </thead>
         <tbody>
@@ -46,7 +49,12 @@
                                 <text><span class="badge badge-danger">InActive</span></text>
                             }
                         </td>
-                        <td><a asp-action="Save" asp-route-id="@item.ProductCategoryGuid"><i class="fa fa-edit"></i></a></td>
+                        <td>
+                            @if (ViewBag.Edit != null && ViewBag.Edit == true)
+                            {
+                            <a asp-action="Save" asp-route-id="@item.ProductCategoryGuid"><i class="fa fa-edit"></i></a>
+                            }    
+                        </td>
                     </tr>
                 }
             }

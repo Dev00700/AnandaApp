@@ -1,4 +1,4 @@
-﻿@model IPagedList<MyApp.Models.DistrubutorValueTGTDto>;
+﻿@model IPagedList<MyApp.Models.DailyValueTGTDto>;
 @using X.PagedList;
 <div class="table-responsive">
     <table class="table table-striped table-hover ">
@@ -11,11 +11,11 @@
                     <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="linetype" placeholder="Line Type" />
                 </th>
                 <th>
-                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="month" placeholder="Month" />
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="date" placeholder="Date" />
                 </th>
-              @*   <th>
-                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="distgt" placeholder="DIS TGT" />
-                </th> *@
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="valuetarget" placeholder="Value Target" />
+                </th>
 
             </tr>
             <tr class="table-head-bg-success">
@@ -23,10 +23,10 @@
             <tr>
                 <th>DIC Name</th>
                 <th>Line Type</th>
-                <th>Month</th>
-                <th>DIS TGT</th>
+                <th>Date</th>
+                <th>Value Target per Day</th>
                 <th>Status</th>
-                 @if (ViewBag.Edit != null && ViewBag.Edit == true)
+                   @if (ViewBag.Edit != null && ViewBag.Edit == true)
                             {
                 <th>Actions</th>
                             }
@@ -41,8 +41,8 @@
                     <tr>
                         <td>@user.DICName</td>
                         <td>@user.LineType</td>
-                        <td>@user.Month</td>
-                        <td>@user.DisTGT</td>
+                        <td>@user.Date</td>
+                        <td>@user.ValueTargetPerDay</td>
 
                         <td>
                             @if (user.Status == "Active")
@@ -57,10 +57,10 @@
                         <td>
                             @if (ViewBag.Edit != null && ViewBag.Edit == true)
                             {
-                            <a asp-action="Save" asp-route-id="@user.DistrubutorValueGuid"><i class="fa fa-edit"></i></a>
-                            
+                                <a asp-action="Save" asp-route-id="@user.DailyValueGuid"><i class="fa fa-edit"></i></a>
                             }
-                            </td>
+
+                        </td>
                     </tr>
                 }
             }
@@ -114,9 +114,7 @@
                     <option value="@size">@size</option>
                 }
             </select>
-           
+
         </div>
     </div>
 </div>
-
-

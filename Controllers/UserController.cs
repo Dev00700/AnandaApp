@@ -76,14 +76,31 @@ namespace MyApp.Controllers
         [HttpGet]
         public IActionResult ChangePassword()
         {
-           UserDto user=new UserDto();
-            user.UserGuid =Guid.Parse( SessionManager.UserGuid);
+           
+            UserDto user=new UserDto();
+            if (SessionManager.RoleId != "1")
+            {
+                user.UserGuid = Guid.Parse(SessionManager.UserGuid);
+            }
+            else
+            {
+                ViewBag.User = DropDownService.BindDropDown(5, 0);
+            }
             return View(user);
         }
         [HttpPost]
         public IActionResult ChangePassword([FromBody]UserDto user)
         {
-            var result=UserService.UpdatePassword(user);
+            var result = (CommonResponseDto?)null;
+            if (SessionManager.RoleId == "1")
+            {
+                result = UserService.UpdatePasswordByAdmin(user);
+            }
+            else
+            {
+                 result = UserService.UpdatePassword(user);
+            }
+           
             return Json(result);
         }
     }
