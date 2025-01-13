@@ -1,4 +1,4 @@
-﻿ @model IPagedList<MyApp.Models.ProductCategoryDto>;
+﻿@model IPagedList<MyApp.Models.CommitmentDto>;
 @using X.PagedList;
 
 
@@ -6,23 +6,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 <div class="container">
     <div class="page-inner">
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="card-title">Product Category List</h4>
+                                <h4 class="card-title">Commitment List</h4>
                             </div>
                             <div class="col-md-6">
-                                @if (ViewBag.Add != null && ViewBag.Add == true)
-                                {
                                 <a asp-action="Save" class="btn btn-success btn-sm lstaddbtn">Add</a>
-                                 }
                             </div>
                         </div>
 
@@ -33,8 +29,8 @@
 
 
 
-                            <div id="ProductCategoryTableContainer">
-                                @Html.Partial("_ProductCategoryTable", Model)
+                            <div id="dailyvalueTableContainer">
+                                @Html.Partial("_Commitment", Model)
                             </div>
 
                         </div>
@@ -55,4 +51,4 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-<script src="~/myapp.js/ProductCategory.js"></script>
+<script src="~/myapp.js/Commitment.js?var=@DateTime.Now"></script>

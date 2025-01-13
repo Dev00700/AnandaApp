@@ -92,5 +92,25 @@ namespace MyApp.Models.Common
                 }
             }
         }
+        public static string RoleId
+        {
+            get
+            {
+                var session = _httpContextAccessor?.HttpContext?.Session;
+                if (session == null || string.IsNullOrEmpty(session.GetString("RoleId")))
+                {
+                    return "";
+                }
+                return session.GetString("RoleId");
+            }
+            set
+            {
+                // var session = _httpContextAccessor?.HttpContext?.Session;
+                if (session != null)
+                {
+                    session.SetString("RoleId", value);
+                }
+            }
+        }
     }
 }

@@ -1,32 +1,37 @@
-﻿@model IPagedList<MyApp.Models.DailyValueTGTDto>;
+﻿@model IPagedList<MyApp.Models.WeekNumberDto>;
 @using X.PagedList;
 <div class="table-responsive">
     <table class="table table-striped table-hover ">
         <thead>
             <tr>
                 <th>
-                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="dicname" placeholder="DIC NAME" />
+                        <input type="text" class="form-control filter-input form-control-sm txtfilter datepicker" data-column="fromdate" placeholder="From Date" />
                 </th>
                 <th>
-                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="linetype" placeholder="Line Type" />
+                        <input type="text" class="form-control filter-input form-control-sm txtfilter datepicker" data-column="todate" placeholder="To Date" />
+
+                   
                 </th>
+               
                 <th>
-                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="date" placeholder="Date" />
-                </th>
-                <th>
-                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="valuetarget" placeholder="Value Target" />
+                   
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="weekno" placeholder="Week No" />
+                        
                 </th>
 
             </tr>
             <tr class="table-head-bg-success">
 
             <tr>
-                <th>DIC Name</th>
-                <th>Line Type</th>
-                <th>Date</th>
-                <th>Value Target per Day</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Week No.</th>
+               
                 <th>Status</th>
-                <th>Actions</th>
+                    @if (ViewBag.Edit != null && ViewBag.Edit == true)
+                    {
+                    <th>Actions</th>
+                    }
             </tr>
 
         </thead>
@@ -36,10 +41,10 @@
                 foreach (var user in Model)
                 {
                     <tr>
-                        <td>@user.DICName</td>
-                        <td>@user.LineType</td>
-                        <td>@user.Date</td>
-                        <td>@user.ValueTargetPerDay</td>
+                        <td>@user.FromDate</td>
+                        <td>@user.ToDate</td>
+                        <td>@user.WeekNo</td>
+                       
 
                         <td>
                             @if (user.Status == "Active")
@@ -51,7 +56,13 @@
                                 <text><span class="badge badge-danger">InActive</span></text>
                             }
                         </td>
-                        <td><a asp-action="Save" asp-route-id="@user.DailyValueGuid"><i class="fa fa-edit"></i></a></td>
+                        <td>
+                            @if (ViewBag.Edit != null && ViewBag.Edit == true)
+                            {
+                                <a asp-action="Save" asp-route-id="@user.WeekNoGuid"><i class="fa fa-edit"></i></a>
+                            }
+
+                        </td>
                     </tr>
                 }
             }

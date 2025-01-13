@@ -155,7 +155,8 @@ $("#changepassword").click(function(){
     let req = JSON.stringify({
 
         Password: $("#Password").val(),
-        UserGuid: $("#UserGuid").val()
+        UserGuid: $("#UserGuid").val(),
+        UserId: $("#UserId").val()
     });
     $.ajax({
         url: "/User/ChangePassword",

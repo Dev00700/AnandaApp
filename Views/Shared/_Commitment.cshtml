@@ -1,35 +1,47 @@
-﻿@model IPagedList<MyApp.Models.DistrubutorValueTGTDto>;
+﻿@model IPagedList<MyApp.Models.CommitmentDto>;
 @using X.PagedList;
 <div class="table-responsive">
     <table class="table table-striped table-hover ">
         <thead>
             <tr>
                 <th>
-                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="dicname" placeholder="DIC NAME" />
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="plantcode" placeholder="Plant Code" />
                 </th>
                 <th>
-                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="linetype" placeholder="Line Type" />
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="fromdate" placeholder="From Date" />
                 </th>
                 <th>
-                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="month" placeholder="Month" />
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="todate" placeholder="To Date" />
                 </th>
-              @*   <th>
-                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="distgt" placeholder="DIS TGT" />
-                </th> *@
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="weekno" placeholder="Week No" />
+                </th>
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="vlccommitment" placeholder="VLC Commitment" />
+                </th>
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="amcucommitment" placeholder="AMCU Commitment" />
+                </th>
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="amcurecoverd" placeholder="AMCU Recoverd" />
+                </th>
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="pervlcavg" placeholder="Per VLC AVG" />
+                </th>
 
             </tr>
             <tr class="table-head-bg-success">
 
             <tr>
-                <th>DIC Name</th>
-                <th>Line Type</th>
-                <th>Month</th>
-                <th>DIS TGT</th>
-                <th>Status</th>
-                 @if (ViewBag.Edit != null && ViewBag.Edit == true)
-                            {
+                <th>Plant Code</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Week No</th>
+                <th>VLC Commitment</th>
+                <th>AMCU Commitment</th>
+                <th>AMCU Recoverd</th>
+                <th>Per VLC AVG</th>
                 <th>Actions</th>
-                            }
             </tr>
 
         </thead>
@@ -39,10 +51,14 @@
                 foreach (var user in Model)
                 {
                     <tr>
-                        <td>@user.DICName</td>
-                        <td>@user.LineType</td>
-                        <td>@user.Month</td>
-                        <td>@user.DisTGT</td>
+                        <td>@user.PlantCode</td>
+                        <td>@user.FromDate</td>
+                        <td>@user.ToDate</td>
+                        <td>@user.WeekNo</td>
+                        <td>@user.VLCCommitment</td>
+                        <td>@user.AMCUCommitment</td>
+                        <td>@user.AMCURecoverd</td>
+                        <td>@user.PerVLCAvg</td>
 
                         <td>
                             @if (user.Status == "Active")
@@ -54,13 +70,7 @@
                                 <text><span class="badge badge-danger">InActive</span></text>
                             }
                         </td>
-                        <td>
-                            @if (ViewBag.Edit != null && ViewBag.Edit == true)
-                            {
-                            <a asp-action="Save" asp-route-id="@user.DistrubutorValueGuid"><i class="fa fa-edit"></i></a>
-                            
-                            }
-                            </td>
+                        <td><a asp-action="Save" asp-route-id="@user.CommitmentGuid"><i class="fa fa-edit"></i></a></td>
                     </tr>
                 }
             }
@@ -114,9 +124,7 @@
                     <option value="@size">@size</option>
                 }
             </select>
-           
+
         </div>
     </div>
 </div>
-
-

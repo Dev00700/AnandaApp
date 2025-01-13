@@ -22,7 +22,7 @@ namespace MyApp.Controllers
         {
             UserDto res = new UserDto();
             res = LoginService.Login(req.UserName, req.Password);
-            if (res.Flag==0)
+            if (res !=null && res.Flag==0)
             {
                 return RedirectToAction("Index", "Home");
             }

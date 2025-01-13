@@ -18,7 +18,10 @@
                                 <h4 class="card-title">Line Type Wise Distrubutor Target List</h4>
                             </div>
                             <div class="col-md-6">
-                                <a asp-action="Save" class="btn btn-success btn-sm lstaddbtn">Add</a>
+                                  @if (ViewBag.Add != null && ViewBag.Add == true)
+                                {
+                                    <a asp-action="Save" class="btn btn-success btn-sm lstaddbtn">Add</a>
+                                }
                             </div>
                         </div>
 

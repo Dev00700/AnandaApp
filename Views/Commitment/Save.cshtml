@@ -1,0 +1,140 @@
+﻿@model MyApp.Models.CommitmentDto;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.HiddenFor(m => m.CommitmentGuid);
+
+<div class="container">
+    <div class="page-inner">
+        @using (Html.BeginForm("Save", "User", FormMethod.Post))
+        {
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Daily Value Target </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @if (Model.CommitmentGuid != Guid.Empty)
+                                {
+                                    <div class="col-md-4 ">
+                                        <div class="form-group">
+                                            <label for="username"><span class="mandatory">*</span>Plant Code</label>
+                                            @Html.DropDownListFor(m => m.PlantCode, new SelectList(ViewBag.PlantCode, "Value", "Text"), new { @class = "form-control form-control-sm form-control-sm js-example-basic-single" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password"><span class="mandatory">*</span> From Date</label>
+                                            <div class="datepicker date input-group">
+                                                @Html.TextBoxFor(model => model.FromDate, "{0:dd/MM/yyyy}", new { @class = "form-control form-control-sm", @maxlength = "100", @placeholder = "FromDate" })
+                                                <div class="input-group-append calend-pos">
+                                                    <span class="input-group-text"> <img src="~/img/calendar_icon.svg" class="cal-h "></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="password"><span class="mandatory">*</span>To Date</label>
+                                            <div class="datepicker date input-group">
+                                                @Html.TextBoxFor(model => model.ToDate, "{0:dd/MM/yyyy}", new { @class = "form-control form-control-sm", @maxlength = "100", @placeholder = "To Date" })
+                                                <div class="input-group-append calend-pos">
+                                                    <span class="input-group-text"> <img src="~/img/calendar_icon.svg" class="cal-h "></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password"><span class="mandatory">*</span> Week No</label>
+                                                @Html.TextBoxFor(model => model.WeekNo, new { @class = "form-control form-control-sm", @maxlength = "100", @placeholder = "WeekNo", @disabled = "disabled" })
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="password"><span class="mandatory">*</span>VLC Commitment</label>
+                                            @Html.TextBoxFor(m => m.VLCCommitment, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "VLC Commitment" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password"><span class="mandatory">*</span>AMCU Commitment</label>
+                                            @Html.TextBoxFor(m => m.AMCUCommitment, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "AMCU Commitment" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="password"><span class="mandatory">*</span>AMCU Recoverd</label>
+                                            @Html.TextBoxFor(m => m.AMCURecoverd, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "AMCU Commitment" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password"><span class="mandatory">*</span>Per VLC Avg</label>
+                                            @Html.TextBoxFor(m => m.PerVLCAvg, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Per VLC AVG" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="password">Active</label><br />
+                                            @if (Model.CommitmentGuid != Guid.Empty)
+                                            {
+                                                @Html.CheckBoxFor(m => m.IsActive)
+                                            }
+                                            else
+                                            {
+                                                @Html.CheckBoxFor(m => m.IsActive, new { @disabled = "disabled" })
+                                            }
+
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="table-responsive table-container">
+                                        <table id="commitment" class="table  table-hover fixed-header-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Plant Code</th>
+                                                    <th>From Date</th>
+                                                    <th>To Date</th>
+                                                    <th>Week No</th>
+                                                    <th>VLC Commitment</th>
+                                                    <th>AMCU Commitment</th>
+                                                    <th>AMCU Recoverd</th>
+                                                    <th>Per VLC Avg</th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody id="commitmentbody"></tbody>
+                                        </table>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            @if (Model.CommitmentGuid != Guid.Empty)
+                            {
+                                <button type="button" class="btn btn-success" id="save">@ViewBag.Button</button>
+                                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-success" id="savelist">Submit</button>
+                                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/myapp.js/Commitment.js?var=@DateTime.Now"></script>
+
+
+
