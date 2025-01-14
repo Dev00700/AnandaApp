@@ -1,0 +1,87 @@
+﻿@model MyApp.Models.HoshinQltyExpHoldDto;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.HiddenFor(m => m.HoshinQltyExpGuid);
+
+<div class="container">
+    <div class="page-inner">
+        @using (Html.BeginForm("Save", "User", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Cattel Feed Target </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="table-responsive table-container">
+                                    <table id="hosingqltyExpholdtable" class="table  table-hover fixed-header-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Plant Code</th>
+                                                <th>Plant Name</th>
+                                                <th> Date</th>
+                                                <th>TS</th>
+                                                <th>MBRT</th>
+                                                <th>RMV</th>
+                                                <th>Protine</th>
+                                                <th>CHHANA</th>
+                                                <th>Temprature</th>
+                                                <th>Taste  </th>
+                                                <th>SPC  </th>
+                                                <th>SR_Shift1  </th>
+                                                <th>SR_Shift2  </th>
+                                                <th>chi_exp  </th>
+                                                <th>RM_exp  </th>
+                                                <th>Sal_exp  </th>
+                                                <th>Conv_exp  </th>
+                                                <th>Cant_exp  </th>
+                                                <th>Oth_exp  </th>
+                                                <th>Trans_exp  </th>
+                                                <th>Qlty_rate  </th>
+                                                <th>AS Hoshin </th>
+                                                <th>AKS Hoshin</th>
+                                                <th>MA Hoshin</th>
+                                                <th>MC Hosin</th>
+                                                <th>Route Hoshin</th>
+                                                <th>EKO Hoshin</th>
+                                                <th>10 Aur Bas Hoshin</th>
+                                                <th>CO Hoshin</th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody id="hosingqltyExpholdvaluebody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-action">
+                            @if (Model.HoshinQltyExpGuid != Guid.Empty)
+                            {
+                                <button type="button" class="btn btn-success" id="save">@ViewBag.Button</button>
+                                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-success" id="savelist">Submit</button>
+                                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/myapp.js/HoshinQltyExpHold.js?var=@DateTime.Now"></script>
+
+
+
