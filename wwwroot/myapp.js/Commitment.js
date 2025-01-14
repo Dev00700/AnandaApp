@@ -1,4 +1,65 @@
-﻿$(document).ready(function () {
+﻿//$(document).ready(function () {
+//    $.ajax({
+//        url: "/Commitment/GetPlantName",
+//        type: "POST",
+//        contentType: "application/json",
+//        success: function (response) {
+//            let str = "";
+//            if (response != null) {
+//                for (var i = 0; i < response.masterdata.length; i++) {
+//                    str += "<tr>";
+//                    str += "<td> <input type='text' value='" + response.masterdata[i].plantCode + "'  id='plant_" + i + "'   data-plantcodeid='" + response.masterdata[i].plantCodeId + "' class = 'form-control form-control-sm' disabled /></td>";
+//                    str += "<td> <input type='text' value='" + response.masterdata[i].plantName + "'  id='plantName_" + i + "'    class = 'form-control form-control-sm' disabled /></td>";
+//                    str += `<td> <div class="datepicker date input-group">
+//                                           <input type='text'  id='Fromdate_`+ i + `'  value="${GetCurrentDate()}" class = 'form-control form-control-sm'/>
+//                                            <div class="input-group-append calend-pos">
+//                                                <span class="input-group-text"> <img src="../img/calendar_icon.svg" class="cal-h "></span>
+//                                            </div>
+//                                        </div></td>`;
+
+//                    str += `<td> <div class="datepicker date input-group">
+//                                           <input type='text'  id='Todate_`+ i + `'  value="${GetCurrentDate()}" class = 'form-control form-control-sm'/>
+//                                            <div class="input-group-append calend-pos">
+//                                                <span class="input-group-text"> <img src="../img/calendar_icon.svg" class="cal-h "></span>
+//                                            </div>
+//                                        </div></td>`;
+//                    str += "<td><select class='form-control form-control-sm form-control-sm js-example-basic-single weekno' id='weeknoId_" + i + "'></select> </td> ";
+
+//                    //str += "<td><input type='text' id='weekno_" + i + "' value='" + response.masterdata[i].weekNo + "' class='form-control form-control-sm' disabled='true'/>" +
+//                    //    "<input type='hidden' id='weeknoid_" + i + "' value='" + response.masterdata[i].weeknoId + "' /></td>";
+
+//                    str += "<td><input type='text'  id='vlccommitment_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+//                    str += "<td><input type='text'  id='amcucommitment_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+//                    str += "<td><input type='text'  id='amcurecoverd_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+//                    str += "<td><input type='text'  id='pervlcavg_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+//                    str += "</tr>"
+//                }
+
+//                let str2 = "";
+//                for (var j = 0; j < response.dropdown.length; j++) {
+
+//                    str2 += "<option value='" + response.dropdown[j].value + "'>" + response.dropdown[j].text + "</option>";
+//                }
+
+
+//                $("#commitmentbody").html('');
+//                $("#commitmentbody").html(str);
+
+//                $(".weekno").html(str2);
+//                // Initialize Select2 for dynamically created elements
+//                $(".js-example-basic-single").select2({
+//                    width: '100%'
+//                });
+//                $(".weekno input").datepicker({
+//                    format: "dd/mm/yyyy", // Update as per your format
+//                    autoclose: true,
+//                });
+//            }
+//        }
+//    });
+
+//});
+$(document).ready(function () {
     $.ajax({
         url: "/Commitment/GetPlantName",
         type: "POST",
@@ -11,22 +72,19 @@
                     str += "<td> <input type='text' value='" + response.masterdata[i].plantCode + "'  id='plant_" + i + "'   data-plantcodeid='" + response.masterdata[i].plantCodeId + "' class = 'form-control form-control-sm' disabled /></td>";
                     str += "<td> <input type='text' value='" + response.masterdata[i].plantName + "'  id='plantName_" + i + "'    class = 'form-control form-control-sm' disabled /></td>";
                     str += `<td> <div class="datepicker date input-group">
-                                           <input type='text'  id='Fromdate_`+ i + `'  value="${GetCurrentDate()}" class = 'form-control form-control-sm'/>
+                                           <input type='text'  id='Fromdate_`+ i + `'  value="${GetCurrentDate()}" class = 'form-control form-control-sm from-date'/>
                                             <div class="input-group-append calend-pos">
                                                 <span class="input-group-text"> <img src="../img/calendar_icon.svg" class="cal-h "></span>
                                             </div>
                                         </div></td>`;
 
                     str += `<td> <div class="datepicker date input-group">
-                                           <input type='text'  id='Todate_`+ i + `'  value="${GetCurrentDate()}" class = 'form-control form-control-sm'/>
+                                           <input type='text'  id='Todate_`+ i + `'  value="${GetCurrentDate()}" class = 'form-control form-control-sm to-date'/>
                                             <div class="input-group-append calend-pos">
                                                 <span class="input-group-text"> <img src="../img/calendar_icon.svg" class="cal-h "></span>
                                             </div>
                                         </div></td>`;
-                    str += "<td><select class='form-control form-control-sm form-control-sm js-example-basic-single weekno' id='weeknoId_" + i + "'></select> </td> ";
-
-                    //str += "<td><input type='text' id='weekno_" + i + "' value='" + response.masterdata[i].weekNo + "' class='form-control form-control-sm' disabled='true'/>" +
-                    //    "<input type='hidden' id='weeknoid_" + i + "' value='" + response.masterdata[i].weeknoId + "' /></td>";
+                    str += "<td><select class='form-control form-control-sm form-control-sm js-example-basic-single weekno' id='weeknoId_" + i + "'></select> </td>";
 
                     str += "<td><input type='text'  id='vlccommitment_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
                     str += "<td><input type='text'  id='amcucommitment_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
@@ -37,28 +95,56 @@
 
                 let str2 = "";
                 for (var j = 0; j < response.dropdown.length; j++) {
-
                     str2 += "<option value='" + response.dropdown[j].value + "'>" + response.dropdown[j].text + "</option>";
                 }
-
 
                 $("#commitmentbody").html('');
                 $("#commitmentbody").html(str);
 
                 $(".weekno").html(str2);
-                // Initialize Select2 for dynamically created elements
                 $(".js-example-basic-single").select2({
                     width: '100%'
                 });
-                $(".weekno input").datepicker({
+                $(".datepicker input").datepicker({
                     format: "dd/mm/yyyy", // Update as per your format
                     autoclose: true,
+                });
+
+                // Attach event listeners for FromDate and ToDate
+                $(".from-date, .to-date").change(function () {
+                    const rowId = $(this).closest("tr").index(); // Get the row index
+                    const fromDate = $(`#Fromdate_${rowId}`).val();
+                    const toDate = $(`#Todate_${rowId}`).val();
+
+                    if (fromDate && toDate) {
+                        // Call API to fetch week numbers based on FromDate and ToDate
+                        $.ajax({
+                            url: "/WeekMaster/GetWeekNumbers",
+                            type: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify({ fromDate, toDate }),
+                            success: function (weekResponse) {
+                                if (weekResponse && weekResponse.weekNumbers) {
+                                    let weekOptions = "";
+                                    weekResponse.weekNumbers.forEach(function (week) {
+                                        weekOptions += `<option value="${week.id}">${week.name}</option>`;
+                                    });
+                                    $(`#weeknoId_${rowId}`).html(weekOptions);
+                                } else {
+                                    $(`#weeknoId_${rowId}`).html("<option value=''>No Week Available</option>");
+                                }
+                            },
+                            error: function () {
+                                alert("Failed to fetch week numbers.");
+                            }
+                        });
+                    }
                 });
             }
         }
     });
-
 });
+
 
 
 $("#save").on("click", function () {
