@@ -70,17 +70,18 @@ namespace MyApp.Controllers
             return PartialView("_CommitmentDto", query.ToPagedList(page, pageSize));
 
         }
-        //public JsonResult GetDICName()
-        //{
-        //    var res = DropDownService.GetMasterDataForAddForm(6, 0);
-        //    var res2 = DropDownService.BindDropDown(8, 0);
-        //    var combineresult = new
-        //    {
-        //        masterdata = res,
-        //        dropdown = res2
-        //    };
-        //    return Json(combineresult);
-        //}
+        public JsonResult GetPlantName()
+        {
+            var res = DropDownService.GetPlantMasterDataForAddForm(10, 0);
+            var res2 = DropDownService.BindDropDown(12, 0);
+
+            var combineresult = new
+            {
+                masterdata = res,
+                dropdown = res2
+            };
+            return Json(combineresult);
+        }
         public ActionResult SaveList([FromBody] List<CommitmentDto> res)
         {
             var result = (CommonResponseDto?)null;
