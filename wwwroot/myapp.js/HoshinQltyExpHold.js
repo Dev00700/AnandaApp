@@ -258,40 +258,27 @@ $(document).on("keyup", ".filter-input", function () {
 function loadTable(page, focusedColumn, focusedValue, rowsPerPage) {
 
     var filters = {
-        Code: $('input[data-column="Code"]').val(),
         PlantCode: $('input[data-column="PlantCode"]').val(),
         PlantName: $('input[data-column="PlantName"]').val(),
-        FromDate: $('input[data-column="FromDate"]').val(),
-        ToDate: $('input[data-column="ToDate"]').val(),
-        WeekNo: $('input[data-column="WeekNo"]').val(),
-        TGTValue: $('input[data-column="TGTValue"]').val(),
+        Date: $('input[data-column="Date"]').val(),
     };
 
     $.ajax({
-        url: '/CattleFeedTGT/GetPagedUser',
+        url: '/HoshinQltyExpHold/GetPagedUser',
         data: {
             page: page,
             rowperpage: rowsPerPage,
-            Code: filters.Code,
             PlantCode: filters.PlantCode,
             PlantName: filters.PlantName,
-            FromDate: filters.FromDate,
-            ToDate: filters.ToDate,
-            WeekNo: filters.WeekNo,
-            TGTValue: filters.TGTValue,
+            Date: filters.Date,
         },
         success: function (data) {
 
-            $('#cattlefeedTableContainer').html(data);
-
+            $('#HoshinQltyExpTableContainer').html(data);
             // Restore filter values and focus
-            $('input[data-column="Code"]').val(filters.Code);
             $('input[data-column="PlantCode"]').val(filters.PlantCode);
             $('input[data-column="PlantName"]').val(filters.PlantName);
-            $('input[data-column="FromDate"]').val(filters.FromDate);
-            $('input[data-column="ToDate"]').val(filters.ToDate);
-            $('input[data-column="WeekNo"]').val(filters.WeekNo);
-            $('input[data-column="TGTValue"]').val(filters.TGTValue);
+            $('input[data-column="Date"]').val(filters.Date);
 
             // Restore focus to the previously focused input field
             if (focusedColumn) {

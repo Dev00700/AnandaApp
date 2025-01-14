@@ -39,5 +39,16 @@ namespace MyApp.BAL
             res = DBHelperDapper.GetAllModelList<PlantName>(_proc, queryparameter);
             return res;
         }
+
+        public static List<PlantMaterial> GetPlantMaterialDataForAddForm(int ProcId, int ParentId)
+        {
+            List<PlantMaterial> res = new List<PlantMaterial>();
+            string _proc = "Proc_BindAllDropDown";
+            var queryparameter = new DynamicParameters();
+            queryparameter.Add("@ProcId", ProcId);
+            queryparameter.Add("@ParentId", ParentId);
+            res = DBHelperDapper.GetAllModelList<PlantMaterial>(_proc, queryparameter);
+            return res;
+        }
     }
 }

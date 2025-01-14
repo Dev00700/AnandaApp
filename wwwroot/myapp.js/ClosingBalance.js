@@ -1,16 +1,19 @@
 ﻿$(document).ready(function () {
     $.ajax({
-        url: "/CattleFeedTGT/GetPlantName",
+        url: "/ClosingBalance/GetPlantMaterial",
         type: "POST",
         contentType: "application/json",
         success: function (response) {
             let str = "";
             if (response != null) {
+                debugger;
                 for (var i = 0; i < response.masterdata.length; i++) {
                     str += "<tr>";
-                    str += "<td><input type='text'  id='code_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/></td> ";
-                    str += "<td> <input type='text' value='" + response.masterdata[i].plantCode + "'  id='plant_" + i + "'   data-plantcodeid='" + response.masterdata[i].plantCodeId + "' class = 'form-control form-control-sm' disabled /></td>";
+                    str += "<td> <input type='text' value='" + response.masterdata[i].plantCode + "'  id='plant_" + i + "'   data-plantmaterialid='" + response.masterdata[i].plantMaterialId + "' class = 'form-control form-control-sm' disabled /></td>";
                     str += "<td> <input type='text' value='" + response.masterdata[i].plantName + "'  id='plantName_" + i + "'    class = 'form-control form-control-sm' disabled /></td>";
+
+                    str += "<td> <input type='text' value='" + response.masterdata[i].meterialCode + "'  id='materialCode_" + i + "'    class = 'form-control form-control-sm' disabled /></td>";
+                    str += "<td> <input type='text' value='" + response.masterdata[i].meterialName + "'  id='materialName_" + i + "'    class = 'form-control form-control-sm' disabled /></td>";
                     str += `<td> <div class="datepicker date input-group">
                                            <input type='text'  id='Fromdate_`+ i + `'  value="${GetCurrentDate()}" class = 'form-control form-control-sm' onchange='GetWeekNoData(${i})'/>
                                             <div class="input-group-append calend-pos">
@@ -25,81 +28,26 @@
                                             </div>
                                         </div></td>`;
 
-                    str += "<td><input type='text'  id='weekno_" + i + "'  class = 'form-control form-control-sm' disabled='true'/> </td>";
-                    str += "<td><input type='text'  id='tgtvalue_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='openingstock_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='totalreceipt_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='totalissueqty_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='closingstock_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td> <input type='text' value='" + response.masterdata[i].bun + "'  id='plant_" + i + "'    class = 'form-control form-control-sm' disabled /></td>";
+
                     str += "</tr>"
                 }
-                $("#cattlefeedvaluebody").html('');
-                $("#cattlefeedvaluebody").html(str);
+                $("#closingbalancevaluebody").html('');
+                $("#closingbalancevaluebody").html(str);
 
 
                 $(".datepicker input").datepicker({
                     format: "dd/mm/yyyy", // Update as per your format
                     autoclose: true,
                 });
-                for (var i = 0; i < response.masterdata.length; i++) {
-                    GetWeekNoData(i);
-                }
             }
         }
     });
 
-});
-
-
-$("#save").on("click", function () {
-
-    let dicid = $("#DICID").val();
-    let linetype = $("#LineType").val();
-    let date = $("#Date").val();
-    let valuetarget = $("#ValueTargetPerDay").val();
-    let isActive = $("#IsActive").is(":checked");
-    let Dailyvalueguid = $("#DailyValueGuid").val();
-
-    if (dicid.trim() == "0") {
-        WarningMsg("Please select dic name");
-        return false;
-    }
-    else if (linetype.trim() == "") {
-        WarningMsg("Please enter linetype");
-        return false;
-    }
-    else if (date.trim() == "") {
-        WarningMsg("Please enter date");
-        return false;
-    }
-    else if (valuetarget.trim() == "0") {
-        WarningMsg("Please enter date");
-        return false;
-    }
-    let req = JSON.stringify({
-        DICID: dicid,
-        LineType: linetype,
-        Date: date,
-        ValueTargetPerDay: valuetarget,
-        IsActive: isActive,
-        DailyValueGuid: Dailyvalueguid
-    });
-
-    $.ajax({
-        url: "/DailyValueTGT/Save",
-        type: "POST",
-        contentType: "application/json",
-        data: req,
-        success: function (response) {
-            if (response != null) {
-                if (response.flag == 1) {
-                    SuccessMsg(response.message, "/DailyValueTGT/Index");
-                }
-                else if (response.flag == 2) {
-                    ErrorMsg(response.message);
-                }
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error("Error occurred:", error);
-        }
-    });
 });
 
 
@@ -107,24 +55,26 @@ $("#save").on("click", function () {
 $("#savelist").on("click", function () {
     debugger;
     let records = [];
-    $("#cattlefeedvaluebody tr").each(function () {
+    $("#closingbalancevaluebody tr").each(function () {
         // Extract values from the inputs in the current row
-        const code = $(this).find("input[id^='code']").val();
-        const plantcodeid = $(this).find("input[id^='plant']").data("plantcodeid");
+        const PlantMaterialId = $(this).find("input[id^='plant']").data("plantmaterialid");
         const Fromdate = $(this).find("input[id^='Fromdate']").val();
         const Todate = $(this).find("input[id^='Todate']").val();
-        const weekno = $(this).find("input[id^='weekno']").val();
-        const tgtvalue = $(this).find("input[id^='tgtvalue']").val();
-
+        const openingstock = $(this).find("input[id^='openingstock']").val();
+        const totalreceipt = $(this).find("input[id^='totalreceipt']").val();
+        const totalissueqty = $(this).find("input[id^='totalissueqty']").val();
+        const closingstock = $(this).find("input[id^='closingstock']").val();
+        
         // Create an object for the current row's data
-        if (code && plantcodeid && Fromdate && Todate && weekno ) { // Only add valid rows
+        if (PlantMaterialId && Fromdate && Todate && openingstock && closingstock) { // Only add valid rows
             records.push({
-                Code: code,
-                PlantCodeId: plantcodeid,
+                PlantMaterialId: PlantMaterialId,
                 FromDate: Fromdate,
                 ToDate: Todate,
-                WeekNo: weekno,
-                TGTValue: tgtvalue
+                OpeningStock: openingstock,
+                TotalReceipt: totalreceipt,
+                TotalIssueQuantities: totalissueqty,
+                ClosingStock: closingstock,
             });
         }
     });
@@ -132,14 +82,14 @@ $("#savelist").on("click", function () {
     if (records.length > 0) {
         // Send the data to the server using AJAX
         $.ajax({
-            url: "/CattleFeedTGT/SaveList",
+            url: "/ClosingBalance/SaveList",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(records),
             success: function (response) {
                 if (response != null) {
                     if (response.flag == 1) {
-                        SuccessMsg(response.message, "/CattleFeedTGT/Index");
+                        SuccessMsg(response.message, "/ClosingBalance/Index");
                     }
                     else if (response.flag == 2) {
                         ErrorMsg(response.message);
@@ -158,7 +108,7 @@ $("#savelist").on("click", function () {
 
 // Cancel button
 $("#cancel").click(function () {
-    window.location.href = "/CattleFeedTGT/Index";
+    window.location.href = "/ClosingBalance/Index";
 });
 
 //============== FOR PAGENATION=============
@@ -244,27 +194,6 @@ function loadTable(page, focusedColumn, focusedValue, rowsPerPage) {
         },
         error: function (xhr, status, error) {
             console.error("Error:", error);
-        }
-    });
-}
-
-
-function GetWeekNoData(rowIndex) {
-    debugger;
-
-    var fromDate = $("#Fromdate_" + rowIndex).val();
-    var toDate = $("#Todate_" + rowIndex).val();
-
-    $.ajax({
-        url: "/CattleFeedTGT/GetWeekNo",
-        type: "POST",
-        data: { FromDate: fromDate, ToDate: toDate },
-        success: function (response) {
-            var _weekno = response;
-            $("#weekno_" + rowIndex).val(_weekno);  
-        },
-        error: function (error) {
-            ErrorMsg("An error occurred while Getting records.");
         }
     });
 }

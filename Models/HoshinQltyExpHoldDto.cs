@@ -7,6 +7,8 @@ namespace MyApp.Models
     {
         public Guid HoshinQltyExpGuid {  get; set; }
         public long PlantCodeId { get; set; }
+        public string PlantCode { get; set; }
+        public string PlantName { get; set; }
         public string Date { get; set; }
         public decimal TS { get; set; }
         public decimal MBRT { get; set; }

@@ -11,72 +11,68 @@ using X.PagedList.Extensions;
 namespace MyApp.Controllers
 {
     [CustomAuthenticationFilter]
-    public class HoshinQltyExpHoldController : BaseController
+    public class ClosingBalanceController : BaseController
     {
-        public HoshinQltyExpHoldController(IConfiguration configuration) : base(configuration)
+        public ClosingBalanceController(IConfiguration configuration) : base(configuration)
         {
 
         }
         public ActionResult Index(int? page = 1)
         {
-            List<HoshinQltyExpHoldDto> res = HoshinQltyExpHoldService.GetAllList();
+            List<ClosingBalanceDto> res = ClosingBalanceService.GetAllList();
             return View(res.ToPagedList(page ?? 1, PageRecordCount));
         }
+
         public ActionResult Save(string? id)
         {
-            HoshinQltyExpHoldDto res = new HoshinQltyExpHoldDto();
+            ClosingBalanceDto res = new ClosingBalanceDto();
             ViewBag.Button = "Submit";
             res.IsActive = true;
             if (id != null)
             {
-                res = HoshinQltyExpHoldService.Get(id);
+                res = ClosingBalanceService.Get(id);
                 ViewBag.Button = "Update";
             }
             return View(res);
         }
-        [HttpPost]
-        public ActionResult Save([FromBody] HoshinQltyExpHoldDto res)
-        {
-            var result = (CommonResponseDto?)null;
-            if (res.HoshinQltyExpGuid == Guid.Empty)
-            {
-
-                result = HoshinQltyExpHoldService.Save(res);
-            }
-            return Json(result);
-        }
-        public IActionResult GetPagedUser(int page, int rowperpage,  string PlantCode, string PlantName, string Date)
+        
+        
+        public IActionResult GetPagedUser(int page, int rowperpage, string PlantCode, string PlantName, string FromDate,
+            string ToDate, string OpeningStock, string ClosingStock)
         {
             var pageSize = rowperpage != 0 ? rowperpage : PageRecordCount;
-            var res = HoshinQltyExpHoldService.GetAllList();
+            var res = ClosingBalanceService.GetAllList();
 
             var filters = new Dictionary<string, string>
                    {
                      { "PlantCode", PlantCode },
                      { "PlantName", PlantName},
-                     { "Date", Date},
+                     { "FromDate", FromDate},
+                     { "ToDate", ToDate},
+                     { "OpeningStock", OpeningStock},
+                     { "ClosingStock", ClosingStock},
                    };
 
-            IQueryable<HoshinQltyExpHoldDto> query = res.AsQueryable();
+            IQueryable<ClosingBalanceDto> query = res.AsQueryable();
             query = query.ApplyFilters(filters);
-            return PartialView("_HoshinQltyExpHold", query.ToPagedList(page, pageSize));
+            return PartialView("_ClosingBalance", query.ToPagedList(page, pageSize));
 
         }
 
-        public JsonResult GetPlantName()
+        public JsonResult GetPlantMaterial()
         {
-            var res = DropDownService.GetPlantMasterDataForAddForm(10, 0);
+            var res = DropDownService.GetPlantMaterialDataForAddForm(13, 0);
             var combineresult = new
             {
                 masterdata = res,
             };
             return Json(combineresult);
         }
-        public ActionResult SaveList([FromBody] List<HoshinQltyExpHoldDto> res)
+        public ActionResult SaveList([FromBody] List<ClosingBalanceDto> res)
         {
             var result = (CommonResponseDto?)null;
 
-            result = HoshinQltyExpHoldService.SaveList(res);
+            result = ClosingBalanceService.SaveList(res);
 
             return Json(result);
         }

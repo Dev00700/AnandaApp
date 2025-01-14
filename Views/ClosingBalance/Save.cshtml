@@ -1,0 +1,68 @@
+﻿@model MyApp.Models.ClosingBalanceDto;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.HiddenFor(m => m.ClosingBalanceGuid);
+
+<div class="container">
+    <div class="page-inner">
+        @using (Html.BeginForm("Save", "User", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Cattel Feed Target </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="table-responsive table-container">
+                                    <table id="closingbalancetable" class="table  table-hover fixed-header-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Plant Code</th>
+                                                <th>Plant Name</th>
+                                                <th>Material Code</th>
+                                                <th>Material Description</th>
+                                                <th>From Date</th>
+                                                <th>To Date</th>
+                                                <th>Opening Stock</th>
+                                                <th>Total Receipt</th>
+                                                <th>Total Issue Quantity</th>
+                                                <th>Closing Stock</th>
+                                                <th>Bun</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="closingbalancevaluebody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-action">
+                            @if (Model.ClosingBalanceGuid != Guid.Empty)
+                            {
+                                <button type="button" class="btn btn-success" id="save">@ViewBag.Button</button>
+                                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-success" id="savelist">Submit</button>
+                                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/myapp.js/ClosingBalance.js?var=@DateTime.Now"></script>
+
+
+

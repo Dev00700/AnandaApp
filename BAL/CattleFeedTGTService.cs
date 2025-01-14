@@ -74,5 +74,18 @@ namespace MyApp.BAL
             res = DBHelperDapper.GetAllModel<CommonResponseDto>(_proc, queryparameter);
             return res;
         }
+
+
+        public static string GetWeekNo(string FromDate, string ToDate)
+        {
+            string weekno = string.Empty;
+            string _proc = "Proc_CattleFeedTGT";
+            var queryparameter = new DynamicParameters();
+            queryparameter.Add("@FromDate", FromDate);
+            queryparameter.Add("@ToDate", ToDate);
+            queryparameter.Add("@ProcId", 6);
+            weekno = DBHelperDapper.GetAllModel<string>(_proc, queryparameter);
+            return weekno;
+        }
     }
 }

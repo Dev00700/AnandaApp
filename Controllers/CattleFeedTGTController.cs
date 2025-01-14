@@ -25,7 +25,6 @@ namespace MyApp.Controllers
         }
         public ActionResult Save(string? id)
         {
-            ViewBag.DicName = DropDownService.BindDropDown(11, 0);
             CattleFeedTGTDto res = new CattleFeedTGTDto();
             ViewBag.Button = "Submit";
             res.IsActive = true;
@@ -86,6 +85,13 @@ namespace MyApp.Controllers
             result = CattleFeedTGTService.SaveList(res);
 
             return Json(result);
+        }
+
+        public JsonResult GetWeekNo(string FromDate, string ToDate)
+        {
+           string _weekno = CattleFeedTGTService.GetWeekNo(FromDate,ToDate);
+
+            return Json(_weekno);
         }
     }
 }
