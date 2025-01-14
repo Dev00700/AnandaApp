@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MyApp.BAL;
 using MyApp.Models;
@@ -81,6 +82,19 @@ namespace MyApp.Controllers
                 dropdown = res2
             };
             return Json(combineresult);
+        }
+        public JsonResult GetWeekNumbers(string fromDate, string toDate)
+        {
+            
+            CommitmentDto res = new CommitmentDto();
+            string _proc = "Proc_UDCommitment";
+            var queryparameter = new DynamicParameters();
+            queryparameter.Add("@FromDate", fromDate);
+            queryparameter.Add("@ToDate", toDate);
+            queryparameter.Add("@ProcId", 6);
+            res = DBHelperDapper.GetAllModel<CommitmentDto>(_proc, queryparameter);
+            return Json(res);
+        
         }
         public ActionResult SaveList([FromBody] List<CommitmentDto> res)
         {

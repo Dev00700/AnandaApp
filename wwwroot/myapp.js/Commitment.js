@@ -113,16 +113,27 @@ $(document).ready(function () {
                 // Attach event listeners for FromDate and ToDate
                 $(".from-date, .to-date").change(function () {
                     const rowId = $(this).closest("tr").index(); // Get the row index
-                    const fromDate = $(`#Fromdate_${rowId}`).val();
-                    const toDate = $(`#Todate_${rowId}`).val();
+                    //const fromDate = $(`#Fromdate_${rowId}`).val();
+                    //const toDate = $(`#Todate_${rowId}`).val();
+                    const formatDate = (dateStr) => {
+                        const [day, month, year] = dateStr.split("/");
+                        return `${year}-${month}-${day}`;
+                    };
 
+                    const fromDateInput = $(`#Fromdate_${rowId}`).val();
+                    const toDateInput = $(`#Todate_${rowId}`).val();
+
+                    const fromDate = fromDateInput ? formatDate(fromDateInput) : null;
+                    const toDate = toDateInput ? formatDate(toDateInput) : null;
+
+                    debugger;
                     if (fromDate && toDate) {
                         // Call API to fetch week numbers based on FromDate and ToDate
                         $.ajax({
-                            url: "/WeekMaster/GetWeekNumbers",
+                            url: "/Commitment/GetWeekNumbers",
                             type: "POST",
                             contentType: "application/json",
-                            data: JSON.stringify({ fromDate, toDate }),
+                            data: { fromDate: fromDate, toDate: toDate },
                             success: function (weekResponse) {
                                 if (weekResponse && weekResponse.weekNumbers) {
                                     let weekOptions = "";
