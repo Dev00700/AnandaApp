@@ -18,7 +18,101 @@
 
                         <div class="card-body">
                             <div class="row">
-                                
+                                 @if (Model.CattleFeedGuid != Guid.Empty)
+                                {
+                                    <div class="col-md-4 ">
+                                        <div class="form-group">
+                                            <label for="plantcode"><span class="mandatory">*</span>Plant Code</label>
+                                            @Html.TextBoxFor(m => m.PlantCode, new { @class = "form-control form-control-sm", @placeholder = "Plant Code" , @disabled="true"})
+
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="fromdate"><span class="mandatory">*</span> From Date</label>
+                                            <div class="datepicker date input-group">
+                                                @Html.TextBoxFor(model => model.FromDate, "{0:dd/MM/yyyy}", new { @class = "form-control form-control-sm", @maxlength = "100", @placeholder = "Date", @onchange = "GetWeekNoData(-1)" })
+                                                <div class="input-group-append calend-pos">
+                                                    <span class="input-group-text"> <img src="~/img/calendar_icon.svg" class="cal-h "></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                     
+                                    </div>
+
+                                    <div class="col-md-4 ">
+
+                                        <div class="form-group">
+                                            <label for="plantName"><span class="mandatory">*</span>Plant Name</label>
+                                            @Html.TextBoxFor(m => m.PlantName, new { @class = "form-control form-control-sm", @placeholder = "Plant Name", @disabled = "true" })
+
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="fromdate"><span class="mandatory">*</span> To Date</label>
+                                            <div class="datepicker date input-group">
+                                                @Html.TextBoxFor(model => model.ToDate, "{0:dd/MM/yyyy}", new { @class = "form-control form-control-sm", @maxlength = "100", @placeholder = "Date", @onchange = "GetWeekNoData(-1)" })
+                                                <div class="input-group-append calend-pos">
+                                                    <span class="input-group-text"> <img src="~/img/calendar_icon.svg" class="cal-h "></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                      
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                           <div class="form-group">
+                                            <label for="code"><span class="mandatory">*</span>Code</label>
+                                            @Html.TextBoxFor(m => m.Code, new { @class = "form-control form-control-sm", @placeholder = "Code" })
+                                        </div>
+                                        
+
+
+
+
+                                          <div class="form-group">
+                                            <label for="weekno"><span class="mandatory">*</span>Week No</label>
+                                            @Html.TextBoxFor(m => m.WeekNo, new { @class = "form-control form-control-sm", @placeholder = "Week No", @disabled = "true" })
+
+                                        </div>
+
+                                       
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="targetvalue"><span class="mandatory">*</span>Target Value</label>
+                                            @Html.TextBoxFor(m => m.TGTValue, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Target Value" })
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <div class="form-group">
+                                            <label for="password">Active</label><br />
+                                            @if (Model.CattleFeedGuid != Guid.Empty)
+                                            {
+                                                @Html.CheckBoxFor(m => m.IsActive)
+                                            }
+                                            else
+                                            {
+                                                @Html.CheckBoxFor(m => m.IsActive, new { @disabled = "disabled" })
+                                            }
+
+                                        </div>
+
+                                    </div>
+                                }
+                                else{
+
                                     <div class="table-responsive table-container">
                                     <table id="cattlefeedetable" class="table  table-hover fixed-header-table">
                                             <thead>
@@ -36,6 +130,7 @@
                                             <tbody id="cattlefeedvaluebody"></tbody>
                                         </table>
                                     </div>
+                                    }
                             </div>
                         </div>
                       

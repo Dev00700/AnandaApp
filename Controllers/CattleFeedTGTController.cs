@@ -39,10 +39,9 @@ namespace MyApp.Controllers
         public ActionResult Save([FromBody] CattleFeedTGTDto res)
         {
             var result = (CommonResponseDto?)null;
-            if (res.CattleFeedGuid == Guid.Empty)
+            if (res.CattleFeedGuid != Guid.Empty)
             {
-
-                result = CattleFeedTGTService.Save(res);
+                result = CattleFeedTGTService.Update(res);
             }
             return Json(result);
         }
@@ -65,7 +64,7 @@ namespace MyApp.Controllers
 
             IQueryable<CattleFeedTGTDto> query = res.AsQueryable(); 
             query = query.ApplyFilters(filters);
-            return PartialView("_CattleFeedTGT", query.ToPagedList(page, pageSize));
+            return PartialView("_CattleFeedTGTTable", query.ToPagedList(page, pageSize));
 
         }
 

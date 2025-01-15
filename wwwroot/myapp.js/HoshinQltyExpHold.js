@@ -17,32 +17,32 @@
                                             </div>
                                         </div></td>`;
 
-                    str += "<td><input type='text' value='0' id='TS_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='MBRT_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='RMV_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='Protine_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='CHHANA_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='Temprature_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='Taste_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='SPC_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='SR_Shift1_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='SR_Shift2_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='CHI_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='RM_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='Sal_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='Conv_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='Cant_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='Oth_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='Trans_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='Qlty_Rate_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='AS_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='AKS_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='MA_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='MC_Hosin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='Route_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='EKO_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='Aur_Bas_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
-                    str += "<td><input type='text' value='0' id='CO_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='TS_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='MBRT_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='RMV_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='Protine_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='CHHANA_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='Temprature_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='Taste_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='SPC_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='SR_Shift1_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='SR_Shift2_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='CHI_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='RM_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='Sal_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='Conv_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='Cant_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='Oth_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='Trans_EXP_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='Qlty_Rate_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='AS_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='AKS_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='MA_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='MC_Hosin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='Route_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='EKO_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='Aur_Bas_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
+                    str += "<td><input type='text'  id='CO_Hoshin_" + i + "' class = 'form-control form-control-sm decimalonlytwodigit'/> </td>";
                     str += "</tr>"
 
                 }
@@ -60,66 +60,221 @@
 
 });
 
+$("#save").on("click", function () {
 
-//$("#save").on("click", function () {
+    let date = $("#Date").val();
+    let ts = $("#TS").val();
+    let mbrt = $("#MBRT").val();
+    let rmv = $("#RMV").val();
+    let protine = $("#Protine").val();
+    let chhana = $("#CHHANA").val();
+    let temprature = $("#Temprature").val();
+    let taste = $("#Taste").val();
+    let spc = $("#SPC").val();
+    let sr_shift1 = $("#SR_Shift1").val();
+    let sr_shift2 = $("#SR_Shift2").val();
+    let chi_exp = $("#CHI_EXP").val();
+    let rm_exp = $("#RM_EXP").val();
+    let sal_exp = $("#Sal_EXP").val();
+    let conv_exp = $("#Conv_EXP").val();
+    let cant_exp = $("#Cant_EXP").val();
+    let oth_exp = $("#Oth_EXP").val();
+    let trans_exp = $("#Trans_EXP").val();
+    let qlty_rate = $("#Qlty_Rate").val();
+    let as_hoshin = $("#AS_Hoshin").val();
+    let ask_hoshin = $("#AKS_Hoshin").val();
+    let ma_hoshin = $("#MA_Hoshin").val();
+    let mc_hoshin = $("#MC_Hosin").val();
+    let route_hoshin = $("#Route_Hoshin").val();
+    let eko_hoshin = $("#EKO_Hoshin").val();
+    let aur_bas_hoshin = $("#Aur_Bas_Hoshin").val();
+    let co_hoshin = $("#CO_Hoshin").val();
+    let isActive = $("#IsActive").is(":checked");
+    let HoshinQltyExpGuid = $("#HoshinQltyExpGuid").val();
 
-//    let dicid = $("#DICID").val();
-//    let linetype = $("#LineType").val();
-//    let date = $("#Date").val();
-//    let valuetarget = $("#ValueTargetPerDay").val();
-//    let isActive = $("#IsActive").is(":checked");
-//    let Dailyvalueguid = $("#DailyValueGuid").val();
 
-//    if (dicid.trim() == "0") {
-//        WarningMsg("Please select dic name");
-//        return false;
-//    }
-//    else if (linetype.trim() == "") {
-//        WarningMsg("Please enter linetype");
-//        return false;
-//    }
-//    else if (date.trim() == "") {
-//        WarningMsg("Please enter date");
-//        return false;
-//    }
-//    else if (valuetarget.trim() == "0") {
-//        WarningMsg("Please enter date");
-//        return false;
-//    }
-//    let req = JSON.stringify({
-//        DICID: dicid,
-//        LineType: linetype,
-//        Date: date,
-//        ValueTargetPerDay: valuetarget,
-//        IsActive: isActive,
-//        DailyValueGuid: Dailyvalueguid
-//    });
+    if (date.trim() == "") {
+        WarningMsg("Please enter date");
+        return false;
+    }
+    else if (ts.trim() == "0") {
+        WarningMsg("Please enter ts");
+        return false;
+    }
 
-//    $.ajax({
-//        url: "/DailyValueTGT/Save",
-//        type: "POST",
-//        contentType: "application/json",
-//        data: req,
-//        success: function (response) {
-//            if (response != null) {
-//                if (response.flag == 1) {
-//                    SuccessMsg(response.message, "/DailyValueTGT/Index");
-//                }
-//                else if (response.flag == 2) {
-//                    ErrorMsg(response.message);
-//                }
-//            }
-//        },
-//        error: function (xhr, status, error) {
-//            console.error("Error occurred:", error);
-//        }
-//    });
-//});
+    else if (mbrt.trim() == "0") {
+        WarningMsg("Please enter mbrt");
+        return false;
+    }
+    else if (rmv.trim() == "0") {
+        WarningMsg("Please enter rmv");
+        return false;
+    }
+
+    else if (protine.trim() == "0") {
+        WarningMsg("Please enter protine");
+        return false;
+    }
+
+    else if (chhana.trim() == "0") {
+        WarningMsg("Please enter chhana");
+        return false;
+    }
+
+    else if (temprature.trim() == "0") {
+        WarningMsg("Please enter temprature");
+        return false;
+    }
+
+    else if (taste.trim() == "0") {
+        WarningMsg("Please enter taste");
+        return false;
+    }
+
+    else if (spc.trim() == "0") {
+        WarningMsg("Please enter spc");
+        return false;
+    }
+
+    else if (sr_shift1.trim() == "0") {
+        WarningMsg("Please enter sr_shift1");
+        return false;
+    }
+
+    else if (sr_shift2.trim() == "0") {
+        WarningMsg("Please enter sr_shift2");
+        return false;
+    }
+
+    else if (chi_exp.trim() == "0") {
+        WarningMsg("Please enter chi_exp");
+        return false;
+    }
+
+    else if (rm_exp.trim() == "0") {
+        WarningMsg("Please enter rm_exp");
+        return false;
+    }
+
+    else if (sal_exp.trim() == "0") {
+        WarningMsg("Please enter sal_exp");
+        return false;
+    }
+    else if (conv_exp.trim() == "0") {
+        WarningMsg("Please enter conv_exp");
+        return false;
+    }
+
+    else if (cant_exp.trim() == "0") {
+        WarningMsg("Please enter cant_exp");
+        return false;
+    }
+
+    else if (oth_exp.trim() == "0") {
+        WarningMsg("Please enter oth_exp");
+        return false;
+    }
+
+    else if (trans_exp.trim() == "0") {
+        WarningMsg("Please enter trans_exp");
+        return false;
+    }
+
+    else if (qlty_rate.trim() == "0") {
+        WarningMsg("Please enter qlty_rate");
+        return false;
+    }
+
+    else if (ask_hoshin.trim() == "0") {
+        WarningMsg("Please enter ask_hoshin");
+        return false;
+    }
+
+    else if (ma_hoshin.trim() == "0") {
+        WarningMsg("Please enter ma_hoshin");
+        return false;
+    }
+
+    else if (mc_hoshin.trim() == "0") {
+        WarningMsg("Please enter mc_hoshin");
+        return false;
+    }
+
+    else if (route_hoshin.trim() == "0") {
+        WarningMsg("Please enter route_hoshin");
+        return false;
+    }
+
+    else if (eko_hoshin.trim() == "0") {
+        WarningMsg("Please enter eko_hoshin");
+        return false;
+    }
+
+    else if (aur_bas_hoshin.trim() == "0") {
+        WarningMsg("Please enter aur_bas_hoshin");
+        return false;
+    }
+
+    else if (co_hoshin.trim() == "0") {
+        WarningMsg("Please enter co_hoshin");
+        return false;
+    }
+    let req = JSON.stringify({
+        Date: date,
+        TS: ts,
+        MBRT: mbrt,
+        RMV: rmv,
+        Protine: protine,
+        CHHANA: chhana,
+        Temprature: temprature,
+        Taste: taste,
+        SPC: spc,
+        SR_Shift1: sr_shift1,
+        SR_Shift2: sr_shift2,
+        CHI_EXP: chi_exp,
+        RM_EXP: rm_exp,
+        Sal_EXP: sal_exp,
+        Conv_EXP: conv_exp,
+        Cant_EXP: cant_exp,
+        Oth_EXP: oth_exp,
+        Trans_EXP: trans_exp,
+        Qlty_Rate: qlty_rate,
+        AS_Hoshin: as_hoshin,
+        AKS_Hoshin: ask_hoshin,
+        MA_Hoshin: ma_hoshin,
+        MC_Hosin: mc_hoshin,
+        Route_Hoshin: route_hoshin,
+        EKO_Hoshin: eko_hoshin,
+        Aur_Bas_Hoshin: aur_bas_hoshin,
+        CO_Hoshin: co_hoshin,
+        IsActive: isActive,
+        HoshinQltyExpGuid: HoshinQltyExpGuid
+    });
+
+    $.ajax({
+        url: "/HoshinQltyExpHold/Save",
+        type: "POST",
+        contentType: "application/json",
+        data: req,
+        success: function (response) {
+            if (response != null) {
+                if (response.flag == 1) {
+                    SuccessMsg(response.message, "/HoshinQltyExpHold/Index");
+                }
+                else if (response.flag == 2) {
+                    ErrorMsg(response.message);
+                }
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error occurred:", error);
+        }
+    });
+});
 
 
 
 $("#savelist").on("click", function () {
-    debugger;
     let records = [];
     $("#hosingqltyExpholdvaluebody tr").each(function () {
         // Extract values from the inputs in the current row
@@ -153,7 +308,7 @@ $("#savelist").on("click", function () {
         const CO_Hoshin = $(this).find("input[id^='CO_Hoshin']").val();
 
         // Create an object for the current row's data
-        if ( plantcodeid && Date && TS ) { // Only add valid rows
+        if (plantcodeid && Date && TS > 0 && MBRT && RMV && Protine) { // Only add valid rows
             records.push({
                 PlantCodeId: plantcodeid,
                 Date: Date,
@@ -213,6 +368,7 @@ $("#savelist").on("click", function () {
         WarningMsg("No valid records to save.");
     }
 });
+
 
 // Cancel button
 $("#cancel").click(function () {

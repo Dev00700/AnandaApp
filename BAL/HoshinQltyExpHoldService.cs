@@ -17,22 +17,44 @@ namespace MyApp.BAL
             res = DBHelperDapper.GetAllModelList<HoshinQltyExpHoldDto>(_proc, queryparameter);
             return res;
         }
-        public static CommonResponseDto Save(HoshinQltyExpHoldDto dto)
+        public static CommonResponseDto Update(HoshinQltyExpHoldDto dto)
         {
             CommonResponseDto res = new CommonResponseDto();
-            //string _proc = "Proc_HoshinQltyExpHold";
-            //var queryparameter = new DynamicParameters();
-            //queryparameter.Add("@ProcId", 1);
-            //queryparameter.Add("@Code", dto.Code);
-            //queryparameter.Add("@PlantCodeId", dto.PlantCodeId);
-            //queryparameter.Add("@FromDate", dto.FromDate);
-            //queryparameter.Add("@ToDate", dto.ToDate);
-            //queryparameter.Add("@WeekNo", dto.WeekNo);
-            //queryparameter.Add("@TGTValue", dto.TGTValue);
-            //queryparameter.Add("@IsActive", dto.IsActive);
-            //queryparameter.Add("@createdBy", SessionManager.UserId);
-            //CommonFunction.Printparameter(queryparameter, "HoshinQltyExpHold parameter for saving:");//FOR WRITE LOG'
-            //res = DBHelperDapper.GetAllModel<CommonResponseDto>(_proc, queryparameter);
+            string _proc = "Proc_HoshinQltyExpHold";
+            var queryparameter = new DynamicParameters();
+            queryparameter.Add("@ProcId", 4);
+            queryparameter.Add("@Date", dto.Date);
+            queryparameter.Add("@TS ", dto.TS);
+            queryparameter.Add("@MBRT", dto.MBRT);
+            queryparameter.Add("@RMV", dto.RMV);
+            queryparameter.Add("@Protine", dto.Protine);
+            queryparameter.Add("@CHHANA", dto.CHHANA);
+            queryparameter.Add("@Temprature", dto.Temprature);
+            queryparameter.Add("@Taste", dto.Taste);
+            queryparameter.Add("@SPC", dto.SPC);
+            queryparameter.Add("@SR_Shift1", dto.SR_Shift1);
+            queryparameter.Add("@SR_Shift2", dto.SR_Shift2);
+            queryparameter.Add("@CHI_EXP", dto.CHI_EXP);
+            queryparameter.Add("@RM_EXP", dto.RM_EXP);
+            queryparameter.Add("@Sal_EXP", dto.Sal_EXP);
+            queryparameter.Add("@Conv_EXP", dto.Conv_EXP);
+            queryparameter.Add("@Cant_EXP", dto.Cant_EXP);
+            queryparameter.Add("@Oth_EXP", dto.Oth_EXP);
+            queryparameter.Add("@Trans_EXP", dto.Trans_EXP);
+            queryparameter.Add("@Qlty_Rate", dto.Qlty_Rate);
+            queryparameter.Add("@AS_Hoshin", dto.AS_Hoshin);
+            queryparameter.Add("@AKS_Hoshin", dto.AKS_Hoshin);
+            queryparameter.Add("@MA_Hoshin", dto.MA_Hoshin);
+            queryparameter.Add("@MC_Hosin", dto.MC_Hosin);
+            queryparameter.Add("@Route_Hoshin", dto.Route_Hoshin);
+            queryparameter.Add("@EKO_Hoshin", dto.EKO_Hoshin);
+            queryparameter.Add("@Aur_Bas_Hoshin", dto.Aur_Bas_Hoshin);
+            queryparameter.Add("@CO_Hoshin", dto.CO_Hoshin);
+            queryparameter.Add("@IsActive", dto.IsActive);
+            queryparameter.Add("@HoshinQltyExpGuid", dto.HoshinQltyExpGuid);
+            queryparameter.Add("@createdBy", SessionManager.UserId);
+            CommonFunction.Printparameter(queryparameter, "Hoshin Qlty EXP Hold parameter for update:");//FOR WRITE LOG'
+            res = DBHelperDapper.GetAllModel<CommonResponseDto>(_proc, queryparameter);
             return res;
         }
 

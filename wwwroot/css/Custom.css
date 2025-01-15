@@ -82,3 +82,10 @@
     display: inline-block;
     margin-left: auto; /* Pushes the container to the right */
 }
+.calenderwidth {
+    width: 150px !important;
+}
+
+.datepicker .datepicker-dropdown {
+    z-index: 9999999 !important;
+}

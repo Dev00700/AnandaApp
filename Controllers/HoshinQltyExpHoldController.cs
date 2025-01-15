@@ -38,10 +38,10 @@ namespace MyApp.Controllers
         public ActionResult Save([FromBody] HoshinQltyExpHoldDto res)
         {
             var result = (CommonResponseDto?)null;
-            if (res.HoshinQltyExpGuid == Guid.Empty)
+            if (res.HoshinQltyExpGuid != Guid.Empty)
             {
 
-                result = HoshinQltyExpHoldService.Save(res);
+                result = HoshinQltyExpHoldService.Update(res);
             }
             return Json(result);
         }
@@ -59,7 +59,7 @@ namespace MyApp.Controllers
 
             IQueryable<HoshinQltyExpHoldDto> query = res.AsQueryable();
             query = query.ApplyFilters(filters);
-            return PartialView("_HoshinQltyExpHold", query.ToPagedList(page, pageSize));
+            return PartialView("_HoshinQltyExpHoldTable", query.ToPagedList(page, pageSize));
 
         }
 

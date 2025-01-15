@@ -35,9 +35,22 @@ namespace MyApp.Controllers
             }
             return View(res);
         }
-        
-        
-        public IActionResult GetPagedUser(int page, int rowperpage, string PlantCode, string PlantName, string FromDate,
+
+        [HttpPost]
+        public ActionResult Save([FromBody] ClosingBalanceDto res)
+        {
+            var result = (CommonResponseDto?)null;
+            if (res.ClosingBalanceGuid != Guid.Empty)
+            {
+
+                result = ClosingBalanceService.Update(res);
+            }
+           
+            return Json(result);
+        }
+
+
+        public IActionResult GetPagedUser(int page, int rowperpage, string PlantCode, string PlantName, string MeterialCode, string MeterialName, string FromDate,
             string ToDate, string OpeningStock, string ClosingStock)
         {
             var pageSize = rowperpage != 0 ? rowperpage : PageRecordCount;
@@ -47,6 +60,8 @@ namespace MyApp.Controllers
                    {
                      { "PlantCode", PlantCode },
                      { "PlantName", PlantName},
+                     { "MeterialCode", MeterialCode},
+                     { "MeterialName", MeterialName},
                      { "FromDate", FromDate},
                      { "ToDate", ToDate},
                      { "OpeningStock", OpeningStock},
@@ -55,7 +70,7 @@ namespace MyApp.Controllers
 
             IQueryable<ClosingBalanceDto> query = res.AsQueryable();
             query = query.ApplyFilters(filters);
-            return PartialView("_ClosingBalance", query.ToPagedList(page, pageSize));
+            return PartialView("_ClosingBalanceTable", query.ToPagedList(page, pageSize));
 
         }
 

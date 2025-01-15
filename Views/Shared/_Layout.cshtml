@@ -400,6 +400,7 @@
             });
 
             $('.decimalonly').keypress(function (e) {
+             
                 var charCode = (e.which) ? e.which : event.keyCode;
 
                 // Allow numbers (0-9), one decimal point (.), and prevent multiple decimals
@@ -409,7 +410,7 @@
             });
 
             $(document).on('keypress', '.decimalonlytwodigit', function (e) {
-         
+            
                 var charCode = (e.which) ? e.which : event.keyCode;
 
                 // Allow numbers (0-9), one decimal point (.), and prevent multiple decimals
@@ -448,6 +449,70 @@
                 // Update the input value with the validated value
                 $(this).val(validValue);
             });
+
+                    // Keypress event: Handles key input validation
+        $(document).on('keypress', '.Negativedecimalonlytwodigit', function (e) {
+            var charCode = (e.which) ? e.which : event.keyCode;
+            var inputVal = $(this).val();
+            var keyChar = String.fromCharCode(charCode);
+
+            // Allow digits (0-9), one decimal point (.), and one minus sign (-) at the start
+            if (!keyChar.match(/[0-9.-]/)) {
+                return false; // Block any other characters
+            }
+
+            // Allow only one minus sign at the beginning
+            if (keyChar === '-') {
+                if (inputVal.indexOf('-') !== -1 || $(this)[0].selectionStart !== 0) {
+                    return false; // Block if '-' already exists or not at the start
+                }
+            }
+
+            // Allow only one decimal point
+            if (keyChar === '.' && inputVal.indexOf('.') !== -1) {
+                return false; // Block multiple decimal points
+            }
+
+            // Restrict to two digits after the decimal point
+            if (inputVal.indexOf('.') !== -1) {
+                var decimalPart = inputVal.split('.')[1];
+                if (decimalPart && decimalPart.length >= 2 && $(this)[0].selectionStart > inputVal.indexOf('.')) {
+                    return false; // Block more than two decimal digits
+                }
+            }
+        });
+
+        // Input event: Cleans up pasted or auto-filled input
+        $(document).on('input', '.Negativedecimalonlytwodigit', function () {
+            var value = $(this).val();
+
+            // Remove all invalid characters except digits, a single dot, and a single minus at the start
+            var validValue = value.replace(/[^0-9.-]/g, '');
+
+            // Ensure only one minus sign at the start
+            if (validValue.indexOf('-') > 0) {
+                validValue = validValue.replace(/-/g, ''); // Remove minus if not at the start
+            }
+
+            // Ensure only one decimal point
+            var parts = validValue.split('.');
+            if (parts.length > 2) {
+                validValue = parts[0] + '.' + parts.slice(1).join(''); // Keep only the first decimal
+            }
+
+            // Limit to two digits after the decimal point
+            if (validValue.indexOf('.') !== -1) {
+                var decimalPart = validValue.split('.')[1];
+                if (decimalPart && decimalPart.length > 2) {
+                    validValue = validValue.substring(0, validValue.indexOf('.') + 3);
+                }
+            }
+
+            // Update the input field
+            $(this).val(validValue);
+        });
+
+
 
         });
 

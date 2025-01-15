@@ -22,9 +22,29 @@ namespace MyApp.BAL
             ClosingBalanceDto res = new ClosingBalanceDto();
             string _proc = "Proc_ClosingBalance";
             var queryparameter = new DynamicParameters();
-            queryparameter.Add("@CattleFeedGuid", id);
+            queryparameter.Add("@ClosingBalanceGuid", id);
             queryparameter.Add("@ProcId", 3);
             res = DBHelperDapper.GetAllModel<ClosingBalanceDto>(_proc, queryparameter);
+            return res;
+        }
+
+        public static CommonResponseDto Update(ClosingBalanceDto dto)
+        {
+            CommonResponseDto res = new CommonResponseDto();
+            string _proc = "Proc_ClosingBalance";
+            var queryparameter = new DynamicParameters();
+            queryparameter.Add("@ProcId", 4);
+            queryparameter.Add("@FromDate", dto.FromDate);
+            queryparameter.Add("@ToDate", dto.ToDate);
+            queryparameter.Add("@OpeningStock", dto.OpeningStock);
+            queryparameter.Add("@TotalReceipt", dto.TotalReceipt);
+            queryparameter.Add("@TotalIssueQuantities", dto.TotalIssueQuantities);
+            queryparameter.Add("@ClosingStock", dto.ClosingStock);
+            queryparameter.Add("@IsActive", dto.IsActive);
+            queryparameter.Add("@ClosingBalanceGuid", dto.ClosingBalanceGuid);
+            queryparameter.Add("@createdBy", SessionManager.UserId);
+            CommonFunction.Printparameter(queryparameter, "Closing Balance parameter for update:");//FOR WRITE LOG'
+            res = DBHelperDapper.GetAllModel<CommonResponseDto>(_proc, queryparameter);
             return res;
         }
 

@@ -18,46 +18,287 @@
 
                         <div class="card-body">
                             <div class="row">
+                                @if (Model.HoshinQltyExpGuid != Guid.Empty)
+                                {
+                                    <div class="col-md-4">
 
-                                <div class="table-responsive table-container">
-                                    <table id="hosingqltyExpholdtable" class="table  table-hover fixed-header-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Plant Code</th>
-                                                <th>Plant Name</th>
-                                                <th> Date</th>
-                                                <th>TS</th>
-                                                <th>MBRT</th>
-                                                <th>RMV</th>
-                                                <th>Protine</th>
-                                                <th>CHHANA</th>
-                                                <th>Temprature</th>
-                                                <th>Taste  </th>
-                                                <th>SPC  </th>
-                                                <th>SR_Shift1  </th>
-                                                <th>SR_Shift2  </th>
-                                                <th>chi_exp  </th>
-                                                <th>RM_exp  </th>
-                                                <th>Sal_exp  </th>
-                                                <th>Conv_exp  </th>
-                                                <th>Cant_exp  </th>
-                                                <th>Oth_exp  </th>
-                                                <th>Trans_exp  </th>
-                                                <th>Qlty_rate  </th>
-                                                <th>AS Hoshin </th>
-                                                <th>AKS Hoshin</th>
-                                                <th>MA Hoshin</th>
-                                                <th>MC Hosin</th>
-                                                <th>Route Hoshin</th>
-                                                <th>EKO Hoshin</th>
-                                                <th>10 Aur Bas Hoshin</th>
-                                                <th>CO Hoshin</th>
-                                            </tr>
+                                        <div class="form-group">
+                                            <label for="plantcode"><span class="mandatory">*</span>Plant Code</label>
+                                            @Html.TextBoxFor(m => m.PlantCode, new { @class = "form-control form-control-sm", @placeholder = "Plant Code", @disabled = "true" })
 
-                                        </thead>
-                                        <tbody id="hosingqltyExpholdvaluebody"></tbody>
-                                    </table>
-                                </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="TS"><span class="mandatory">*</span>TS</label>
+                                            @Html.TextBoxFor(m => m.TS, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "TS" })
+
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="Protine"><span class="mandatory">*</span>Protine</label>
+                                            @Html.TextBoxFor(m => m.Protine, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Protine" })
+
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <div class="form-group">
+                                            <label for="plantName"><span class="mandatory">*</span>Plant Name</label>
+                                            @Html.TextBoxFor(m => m.PlantName, new { @class = "form-control form-control-sm", @placeholder = "Plant Name", @disabled = "true" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="MBRT"><span class="mandatory">*</span>MBRT</label>
+                                            @Html.TextBoxFor(m => m.MBRT, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "MBRT" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="CHHANA"><span class="mandatory">*</span>CHHANA</label>
+                                            @Html.TextBoxFor(m => m.CHHANA, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "CHHANA" })
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="fromdate"><span class="mandatory">*</span>  Date</label>
+                                            <div class="datepicker date input-group">
+                                                @Html.TextBoxFor(model => model.Date, "{0:dd/MM/yyyy}", new { @class = "form-control form-control-sm", @maxlength = "100", @placeholder = "Date", @onchange = "GetWeekNoData(-1)" })
+                                                <div class="input-group-append calend-pos">
+                                                    <span class="input-group-text"> <img src="~/img/calendar_icon.svg" class="cal-h "></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="RMV"><span class="mandatory">*</span>RMV</label>
+                                            @Html.TextBoxFor(m => m.RMV, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "RMV" })
+
+                                        </div>
+
+                                           <div class="form-group">
+                                            <label for="Temprature"><span class="mandatory">*</span>Temprature</label>
+                                            @Html.TextBoxFor(m => m.Temprature, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Temprature" })
+
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                         <div class="form-group">
+                                            <label for="Taste"><span class="mandatory">*</span>Taste</label>
+                                            @Html.TextBoxFor(m => m.Taste, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Taste" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="SR_Shift2"><span class="mandatory">*</span>SR_Shift2</label>
+                                            @Html.TextBoxFor(m => m.SR_Shift2, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "SR_Shift2" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="Sal_EXP"><span class="mandatory">*</span>Sal_EXP</label>
+                                            @Html.TextBoxFor(m => m.Sal_EXP, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Sal_EXP" })
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <div class="form-group">
+                                            <label for="SPC"><span class="mandatory">*</span>SPC</label>
+                                            @Html.TextBoxFor(m => m.SPC, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "SPC" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="CHI_EXP"><span class="mandatory">*</span>CHI_EXP</label>
+                                            @Html.TextBoxFor(m => m.CHI_EXP, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "CHI_EXP" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="Conv_EXP"><span class="mandatory">*</span>Conv_EXP</label>
+                                            @Html.TextBoxFor(m => m.Conv_EXP, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Conv_EXP" })
+
+                                        </div>
+
+                                      
+
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="SR_Shift1"><span class="mandatory">*</span>SR_Shift1</label>
+                                            @Html.TextBoxFor(m => m.SR_Shift1, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "SR_Shift1" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="RM_EXP"><span class="mandatory">*</span>RM_EXP</label>
+                                            @Html.TextBoxFor(m => m.RM_EXP, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "RM_EXP" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="Cant_EXP"><span class="mandatory">*</span>Cant_EXP</label>
+                                            @Html.TextBoxFor(m => m.Cant_EXP, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Cant_EXP" })
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="Oth_EXP"><span class="mandatory">*</span>Oth_EXP</label>
+                                            @Html.TextBoxFor(m => m.Oth_EXP, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Oth_EXP" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="AS_Hoshin"><span class="mandatory">*</span>AS_Hoshin</label>
+                                            @Html.TextBoxFor(m => m.AS_Hoshin, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "AS_Hoshin" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="MC_Hosin"><span class="mandatory">*</span>MC_Hosin</label>
+                                            @Html.TextBoxFor(m => m.MC_Hosin, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "MC_Hosin" })
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <div class="form-group">
+                                            <label for="Trans_EXP"><span class="mandatory">*</span>Trans_EXP</label>
+                                            @Html.TextBoxFor(m => m.Trans_EXP, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Trans_EXP" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="AKS_Hoshin"><span class="mandatory">*</span>AKS_Hoshin</label>
+                                            @Html.TextBoxFor(m => m.AKS_Hoshin, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "AKS_Hoshin" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="Route_Hoshin"><span class="mandatory">*</span>Route_Hoshin</label>
+                                            @Html.TextBoxFor(m => m.Route_Hoshin, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Route_Hoshin" })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                          <div class="form-group">
+                                            <label for="Qlty_Rate"><span class="mandatory">*</span>Qlty_Rate</label>
+                                            @Html.TextBoxFor(m => m.Qlty_Rate, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Qlty_Rate" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="MA_Hoshin"><span class="mandatory">*</span>MA_Hoshin</label>
+                                            @Html.TextBoxFor(m => m.MA_Hoshin, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "MA_Hoshin" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="EKO_Hoshin"><span class="mandatory">*</span>EKO_Hoshin</label>
+                                            @Html.TextBoxFor(m => m.EKO_Hoshin, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "EKO_Hoshin" })
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="Aur_Bas_Hoshin"><span class="mandatory">*</span>Aur_Bas_Hoshin</label>
+                                            @Html.TextBoxFor(m => m.Aur_Bas_Hoshin, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "Aur_Bas_Hoshin" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="CO_Hoshin"><span class="mandatory">*</span>CO_Hoshin</label>
+                                            @Html.TextBoxFor(m => m.CO_Hoshin, new { @class = "form-control form-control-sm decimalonlytwodigit", @placeholder = "CO_Hoshin" })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="IsActive">Active</label><br />
+                                            @if (Model.HoshinQltyExpGuid != Guid.Empty)
+                                            {
+                                                @Html.CheckBoxFor(m => m.IsActive)
+                                            }
+                                            else
+                                            {
+                                                @Html.CheckBoxFor(m => m.IsActive, new { @disabled = "disabled" })
+                                            }
+
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="table-responsive table-container">
+                                        <table id="hosingqltyExpholdtable" class="table  table-hover fixed-header-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Plant Code</th>
+                                                    <th>Plant Name</th>
+                                                    <th> Date</th>
+                                                    <th>TS</th>
+                                                    <th>MBRT</th>
+                                                    <th>RMV</th>
+                                                    <th>Protine</th>
+                                                    <th>CHHANA</th>
+                                                    <th>Temprature</th>
+                                                    <th>Taste  </th>
+                                                    <th>SPC  </th>
+                                                    <th>SR_Shift1  </th>
+                                                    <th>SR_Shift2  </th>
+                                                    <th>chi_exp  </th>
+                                                    <th>RM_exp  </th>
+                                                    <th>Sal_exp  </th>
+                                                    <th>Conv_exp  </th>
+                                                    <th>Cant_exp  </th>
+                                                    <th>Oth_exp  </th>
+                                                    <th>Trans_exp  </th>
+                                                    <th>Qlty_rate  </th>
+                                                    <th>AS Hoshin </th>
+                                                    <th>AKS Hoshin</th>
+                                                    <th>MA Hoshin</th>
+                                                    <th>MC Hosin</th>
+                                                    <th>Route Hoshin</th>
+                                                    <th>EKO Hoshin</th>
+                                                    <th>10 Aur Bas Hoshin</th>
+                                                    <th>CO Hoshin</th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody id="hosingqltyExpholdvaluebody"></tbody>
+                                        </table>
+                                    </div>
+                                }
                             </div>
                         </div>
 

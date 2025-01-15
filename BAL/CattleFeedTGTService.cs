@@ -17,25 +17,25 @@ namespace MyApp.BAL
             res = DBHelperDapper.GetAllModelList<CattleFeedTGTDto>(_proc, queryparameter);
             return res;
         }
-        public static CommonResponseDto Save(CattleFeedTGTDto dto)
+        public static CommonResponseDto Update(CattleFeedTGTDto dto)
         {
             CommonResponseDto res = new CommonResponseDto();
             string _proc = "Proc_CattleFeedTGT";
             var queryparameter = new DynamicParameters();
-            queryparameter.Add("@ProcId", 1);
+            queryparameter.Add("@ProcId", 4);
             queryparameter.Add("@Code", dto.Code);
-            queryparameter.Add("@PlantCodeId", dto.PlantCodeId);
             queryparameter.Add("@FromDate", dto.FromDate);
             queryparameter.Add("@ToDate", dto.ToDate);
             queryparameter.Add("@WeekNo", dto.WeekNo);
             queryparameter.Add("@TGTValue", dto.TGTValue);
             queryparameter.Add("@IsActive", dto.IsActive);
-            queryparameter.Add("@createdBy", SessionManager.UserId); 
-            CommonFunction.Printparameter(queryparameter, "CattleFeedTGT parameter for saving:");//FOR WRITE LOG'
+            queryparameter.Add("@CattleFeedGuid", dto.CattleFeedGuid);
+            queryparameter.Add("@createdBy", SessionManager.UserId);
+            CommonFunction.Printparameter(queryparameter, "Cattle Feed Target parameter for update:");//FOR WRITE LOG'
             res = DBHelperDapper.GetAllModel<CommonResponseDto>(_proc, queryparameter);
             return res;
         }
-      
+
         public static CattleFeedTGTDto Get(string id)
         {
             CattleFeedTGTDto res = new CattleFeedTGTDto();

@@ -1,10 +1,12 @@
-﻿@model IPagedList<MyApp.Models.HoshinQltyExpHoldDto>;
+﻿@model IPagedList<MyApp.Models.CattleFeedTGTDto>;
 @using X.PagedList;
 <div class="table-responsive">
     <table class="table table-striped table-hover ">
         <thead>
             <tr>
-              
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="Code" placeholder="Code" />
+                </th>
                 <th>
                     <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="PlantCode" placeholder="Plant Code" />
                 </th>
@@ -12,19 +14,30 @@
                     <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="PlantName" placeholder="Plant Name" />
                 </th>
                 <th>
-                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="Date" placeholder="Date" />
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="FromDate" placeholder="From Date" />
+                </th>
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="ToDate" placeholder="To Date" />
+                </th>
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="WeekNo" placeholder="WeekNo" />
+                </th>
+                <th>
+                    <input type="text" class="form-control filter-input form-control-sm txtfilter" data-column="TGTValue" placeholder="Target Value" />
                 </th>
             </tr>
             <tr class="table-head-bg-success">
 
             <tr>
+                <th>Code</th>
                 <th>Plant Code</th>
                 <th>Plant Name</th>
-                <th>Date</th>
-                <th>TS</th>
-                <th>MBRT</th>
-                <th>RMV</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>WeekNo</th>
+                <th>Target Value</th>
                 <th>Status</th>
+                <th>Actions</th>
             </tr>
 
         </thead>
@@ -34,12 +47,13 @@
                 foreach (var user in Model)
                 {
                     <tr>
+                        <td>@user.Code</td>
                         <td>@user.PlantCode</td>
                         <td>@user.PlantName</td>
-                        <td>@user.Date</td>
-                        <td>@user.TS</td>
-                        <td>@user.MBRT</td>
-                        <td>@user.RMV</td>
+                        <td>@user.FromDate</td>
+                        <td>@user.ToDate</td>
+                        <td>@user.WeekNo</td>
+                        <td>@user.TGTValue</td>
 
                         <td>
                             @if (user.Status == "Active")
@@ -51,7 +65,7 @@
                                 <text><span class="badge badge-danger">InActive</span></text>
                             }
                         </td>
-                        @*   <td><a asp-action="Save" asp-route-id="@user.DailyValueGuid"><i class="fa fa-edit"></i></a></td> *@
+                        <td><a asp-action="Save" asp-route-id="@user.CattleFeedGuid"><i class="fa fa-edit"></i></a></td>
                     </tr>
                 }
             }

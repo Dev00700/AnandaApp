@@ -49,47 +49,56 @@
 
 $("#save").on("click", function () {
 
-    let dicid = $("#DICID").val();
-    let linetype = $("#LineType").val();
-    let date = $("#Date").val();
-    let valuetarget = $("#ValueTargetPerDay").val();
+    let Code = $("#Code").val();
+    let fromdate = $("#FromDate").val();
+    let todate = $("#ToDate").val();
+    let weekno = $("#WeekNo").val();
+    let tgtvalue = $("#TGTValue").val();
     let isActive = $("#IsActive").is(":checked");
-    let Dailyvalueguid = $("#DailyValueGuid").val();
+    let CattleFeedGuid = $("#CattleFeedGuid").val();
 
-    if (dicid.trim() == "0") {
-        WarningMsg("Please select dic name");
+    if (Code.trim() == "" ) {
+        WarningMsg("Please enter code");
         return false;
     }
-    else if (linetype.trim() == "") {
-        WarningMsg("Please enter linetype");
+  
+    else if (fromdate.trim() == "") {
+        WarningMsg("Please enter from date");
         return false;
     }
-    else if (date.trim() == "") {
-        WarningMsg("Please enter date");
+
+    else if (todate.trim() == "") {
+        WarningMsg("Please enter to date");
         return false;
     }
-    else if (valuetarget.trim() == "0") {
-        WarningMsg("Please enter date");
+
+    else if (weekno.trim() == "") {
+        WarningMsg("Please enter week no");
+        return false;
+    }
+    else if (tgtvalue.trim() == "0") {
+        WarningMsg("Please enter target value");
         return false;
     }
     let req = JSON.stringify({
-        DICID: dicid,
-        LineType: linetype,
-        Date: date,
-        ValueTargetPerDay: valuetarget,
+        Code: Code,
+        FromDate: fromdate,
+        ToDate: todate,
+        WeekNo: weekno,
+        TGTValue: tgtvalue,
         IsActive: isActive,
-        DailyValueGuid: Dailyvalueguid
+        CattleFeedGuid: CattleFeedGuid
     });
 
     $.ajax({
-        url: "/DailyValueTGT/Save",
+        url: "/CattleFeedTGT/Save",
         type: "POST",
         contentType: "application/json",
         data: req,
         success: function (response) {
             if (response != null) {
                 if (response.flag == 1) {
-                    SuccessMsg(response.message, "/DailyValueTGT/Index");
+                    SuccessMsg(response.message, "/CattleFeedTGT/Index");
                 }
                 else if (response.flag == 2) {
                     ErrorMsg(response.message);
@@ -250,18 +259,27 @@ function loadTable(page, focusedColumn, focusedValue, rowsPerPage) {
 
 
 function GetWeekNoData(rowIndex) {
-    debugger;
-
-    var fromDate = $("#Fromdate_" + rowIndex).val();
-    var toDate = $("#Todate_" + rowIndex).val();
-
+    let fromDate = ""; let toDate = "";
+    if (rowIndex == -1) {
+        fromDate = $("#FromDate").val();
+        toDate = $("#ToDate").val();
+    }
+    else {
+        fromDate = $("#Fromdate_" + rowIndex).val();
+        toDate = $("#Todate_" + rowIndex).val();
+    }
     $.ajax({
         url: "/CattleFeedTGT/GetWeekNo",
         type: "POST",
         data: { FromDate: fromDate, ToDate: toDate },
         success: function (response) {
             var _weekno = response;
-            $("#weekno_" + rowIndex).val(_weekno);  
+            if (rowIndex == -1) {
+                $("#WeekNo").val(_weekno);  
+            }
+            else {
+                $("#weekno_" + rowIndex).val(_weekno);  
+            }
         },
         error: function (error) {
             ErrorMsg("An error occurred while Getting records.");

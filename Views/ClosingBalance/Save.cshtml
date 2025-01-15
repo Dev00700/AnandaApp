@@ -9,39 +9,153 @@
     <div class="page-inner">
         @using (Html.BeginForm("Save", "User", FormMethod.Post))
         {
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Cattel Feed Target </div>
+                            <div class="card-title">Closing Balance </div>
                         </div>
-
                         <div class="card-body">
                             <div class="row">
+                                @if (Model.ClosingBalanceGuid != Guid.Empty)
+                                {
+                                    <div class="col-md-4 ">
+                                        <div class="form-group">
+                                            <label for="plantcode"><span class="mandatory">*</span>Plant Code</label>
+                                            @Html.TextBoxFor(m => m.PlantCode, new { @class = "form-control form-control-sm", @placeholder = "Plant Code" , @disabled="true"})
 
-                                <div class="table-responsive table-container">
-                                    <table id="closingbalancetable" class="table  table-hover fixed-header-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Plant Code</th>
-                                                <th>Plant Name</th>
-                                                <th>Material Code</th>
-                                                <th>Material Description</th>
-                                                <th>From Date</th>
-                                                <th>To Date</th>
-                                                <th>Opening Stock</th>
-                                                <th>Total Receipt</th>
-                                                <th>Total Issue Quantity</th>
-                                                <th>Closing Stock</th>
-                                                <th>Bun</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="closingbalancevaluebody"></tbody>
-                                    </table>
-                                </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="meterialname"><span class="mandatory">*</span>Meterial Name</label>
+                                            @Html.TextBoxFor(m => m.MeterialName, new { @class = "form-control form-control-sm", @placeholder = "Meterial Name", @disabled = "true" })
+                                        </div>
+                                        
+
+                                    </div>
+
+                                    <div class="col-md-4 ">
+
+                                        <div class="form-group">
+                                            <label for="plantName"><span class="mandatory">*</span>Plant Name</label>
+                                            @Html.TextBoxFor(m => m.PlantName, new { @class = "form-control form-control-sm", @placeholder = "Plant Name", @disabled = "true" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="fromdate"><span class="mandatory">*</span> From Date</label>
+                                            <div class="datepicker date input-group">
+                                                @Html.TextBoxFor(model => model.FromDate, "{0:dd/MM/yyyy}", new { @class = "form-control form-control-sm", @maxlength = "100", @placeholder = "Date" })
+                                                <div class="input-group-append calend-pos">
+                                                    <span class="input-group-text"> <img src="~/img/calendar_icon.svg" class="cal-h "></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                      
+                                      
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                          <div class="form-group">
+                                            <label for="meterialcode"><span class="mandatory">*</span>Material Code</label>
+                                            @Html.TextBoxFor(m => m.MeterialCode, new { @class = "form-control form-control-sm", @placeholder = "Meterial Code", @disabled = "true" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="fromdate"><span class="mandatory">*</span> To Date</label>
+                                            <div class="datepicker date input-group">
+                                                @Html.TextBoxFor(model => model.ToDate, "{0:dd/MM/yyyy}", new { @class = "form-control form-control-sm", @maxlength = "100", @placeholder = "Date" })
+                                                <div class="input-group-append calend-pos">
+                                                    <span class="input-group-text"> <img src="~/img/calendar_icon.svg" class="cal-h "></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="OpeningStock"><span class="mandatory">*</span>Opening Stock</label>
+                                            @Html.TextBoxFor(m => m.OpeningStock, new { @class = "form-control form-control-sm Negativedecimalonlytwodigit", @placeholder = "Opening Stock" })
+
+                                        </div>
+
+
+                                          <div class="form-group">
+                                            <label for="TotalIssueQuantities"><span class="mandatory">*</span>Total Issue Qty</label>
+                                            @Html.TextBoxFor(m => m.TotalIssueQuantities, new { @class = "form-control form-control-sm Negativedecimalonlytwodigit", @placeholder = "Total Issue Qty" })
+
+                                        </div>
+
+
+
+
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <div class="form-group">
+                                            <label for="TotalReceipt"><span class="mandatory">*</span>Total Receipt Qty</label>
+                                            @Html.TextBoxFor(m => m.TotalReceipt, new { @class = "form-control form-control-sm Negativedecimalonlytwodigit", @placeholder = "Total Receipt Qty" })
+
+                                        </div>
+
+                                      
+                                        <div class="form-group">
+                                            <label for="ClosingStock"><span class="mandatory">*</span>Closing Stock</label>
+                                            @Html.TextBoxFor(m => m.ClosingStock, new { @class = "form-control form-control-sm Negativedecimalonlytwodigit", @placeholder = "Closing Stock" })
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="password">Active</label><br />
+                                            @if (Model.ClosingBalanceGuid != Guid.Empty)
+                                            {
+                                                @Html.CheckBoxFor(m => m.IsActive)
+                                            }
+                                            else
+                                            {
+                                                @Html.CheckBoxFor(m => m.IsActive, new { @disabled = "disabled" })
+                                            }
+
+                                        </div>
+
+                                         
+
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="table-responsive table-container">
+                                        <table id="closingbalancetable" class="table  table-hover fixed-header-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Plant Code</th>
+                                                    <th>Plant Name</th>
+                                                    <th>Material Code</th>
+                                                    <th>Material Description</th>
+                                                    <th>From Date</th>
+                                                    <th>To Date</th>
+                                                    <th>Opening Stock</th>
+                                                    <th>Total Receipt</th>
+                                                    <th>Total Issue Quantity</th>
+                                                    <th>Closing Stock</th>
+                                                    <th>Bun</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="closingbalancevaluebody"></tbody>
+                                        </table>
+                                    </div>
+                                }
                             </div>
                         </div>
-
                         <div class="card-action">
                             @if (Model.ClosingBalanceGuid != Guid.Empty)
                             {
